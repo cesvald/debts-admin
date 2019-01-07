@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 9.99
+  started_at: 2019-01-07
+  monthly_debt_id: 
+
+two:
+  amount: 9.99
+  started_at: 2019-01-07
+  monthly_debt_id: 

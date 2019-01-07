@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Agreement payment:</strong>
+  <%= @quotum.agreement_payment %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @quotum.number %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @quotum.state %>
+</p>
+
+<p>
+  <strong>amount:</strong>
+  <%= @quotum.amount %>
+</p>
+
+<%= link_to 'Edit', edit_quotum_path(@quotum) %> |
+<%= link_to 'Back', quota_path %>

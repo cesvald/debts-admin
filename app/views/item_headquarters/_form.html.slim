@@ -1,0 +1,37 @@
+= form_for(@item_headquarter) do |f|   
+  - if @item_headquarter.errors.any?  
+    #error_explanation
+      h2= pluralize(@item_headquarter.errors.count, "error")  
+        prohibited this item_headquarter from being saved:
+      ul
+        - @item_headquarter.errors.full_messages.each do |message|  
+          li= message 
+      
+  .field
+    = f.label :amount 
+    br/
+    = f.text_field :amount  
+  
+  .field
+    = f.label :registered_at 
+    br/
+    = f.date_select :registered_at  
+  
+  .field
+    = f.label :is_billable 
+    br/
+    = f.check_box :is_billable  
+  .field
+    = f.label :item_id 
+    br/
+    = f.text_field :item_id  
+  
+  .field
+    = f.label :headquarter_id 
+    br/
+    = f.text_field :headquarter_id  
+  
+  .actions
+    = f.submit nil, class:'btn btn-primary'
+      
+    

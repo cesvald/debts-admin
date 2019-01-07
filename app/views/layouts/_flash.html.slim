@@ -1,0 +1,11 @@
+.flash
+  - for key, msg in flash
+  	- if key == 'notice'
+    	div class="alert alert-success"
+    		== msg
+    - if key == 'failure'
+     	div class="alert alert-danger"
+    		== msg
+
+    
+	

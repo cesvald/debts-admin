@@ -1,0 +1,74 @@
+.page-header
+	h1 Acuerdo de Pago
+	- if @agreement_payment.opened?
+		= link_to 'Cerrar Acuerdo', close_agreement_payment_path(@agreement_payment), data: {confirm: "¿Estás seguro de cerrar este acuerdo de pago?"}, class:'btn btn-success btn-header' 
+		= link_to 'Cancelar Acuerdo', cancel_agreement_payment_path(@agreement_payment), data: {confirm: "¿Estás seguro de cancelar este acuerdo de pago?"}, class:'btn btn-danger btn-header'
+	- else
+		|&nbsp;
+		p class=("agreement-state state-#{@agreement_payment.state}")
+			= t "agreement_payment_status.#{@agreement_payment.state}"
+	div
+		/! Nav tabs
+		ul.nav.nav-tabs role="tablist" 
+			li.active role="presentation" 
+				a aria-controls="home" data-toggle="tab" href="#information" role="tab"  Información
+			li role="presentation" 
+				a aria-controls="profile" data-toggle="tab" href="#payments" role="tab"  Pagos
+		
+		/! Tab panes
+		.tab-content
+			#information.tab-pane.fade.in.active role="tabpanel"
+					br
+					= render 'form'
+					
+			#payments.tab-pane.fade role="tabpanel"
+				br
+				h5.table-title Pagos
+				- if @agreement_payment.opened?
+					|&nbsp;
+					= link_to "Adicionar Pago", new_agreement_payment_payment_path(@agreement_payment), class: 'btn btn-primary btn-xs'
+				table.table.table-actions
+					thead
+						tr
+							th Pagado el
+							th Valor
+							th Medio
+							th Descripción
+							th
+							th
+					- @agreement_payment.payments.each do |payment|
+						tr
+							td= l payment.paid_at, format: :date
+							td= to_currency payment.amount
+							td= payment.method
+							td= payment.comment
+							td.actions
+								- if @agreement_payment.opened?
+									= link_to "Editar", edit_agreement_payment_payment_path(@agreement_payment, payment), class: "btn btn-xs btn-default"
+									|&nbsp;
+									= link_to "Eliminar", [@agreement_payment, payment], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
+				
+				br
+				.row
+					.col-md-offset-2.col-md-8
+						table.table.summary-table
+							thead
+								tr
+									th
+										h5.table-title Resumen de un vistazo
+									th
+							tr
+								td Total Deuda
+								td= to_currency @agreement_payment.amount
+							tr.payment
+								td Total Pagos
+								td= to_currency @agreement_payment.total_payment
+							tr.total-due
+								td
+									b Total
+								td
+									b= to_currency @agreement_payment.due
+	
+	br
+	
+	= link_to 'Volver', :back, class: 'btn btn-default' 

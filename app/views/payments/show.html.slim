@@ -1,0 +1,22 @@
+p#notice = notice 
+p
+  strong Valor:
+	= @payment.amount 
+p
+  strong Saldo:
+	= @payment.balance 
+p
+  strong Pagado el:
+	= @payment.paid_at 
+p./
+  strong Comentario:
+	= @payment.comment 
+p
+  strong Payment type:
+	= @payment.payment_type 
+p
+  strong Payment:
+	= @payment.payment_id 
+= link_to 'Edit', edit_payment_path(@payment) 
+	= link_to 'Back', payments_path 
+	

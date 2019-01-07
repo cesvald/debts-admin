@@ -1,0 +1,28 @@
+p#notice = notice 
+h1 Descuentos
+.container-fluid
+  .row
+    .col-4.col-xs-12
+      table.table
+        thead
+          tr
+            th Tipo de Descuento
+            th Id descuento
+            th Valor
+            th Fecha de registro
+            th Comentario
+            th colspan="8" 
+        tbody
+          - @discounts.each do |discount| 
+            tr
+              td = discount.discountable_type 
+              td = discount.discountable_id 
+              td = discount.amount 
+              td = discount.registered_at 
+              td = discount.comment 
+              td = link_to 'Show', discount 
+              td = link_to 'Edit', edit_discount_path(discount) 
+              td = link_to 'Destroy', discount, method: :delete, data:   { confirm: 'Está seguro que dese eliminar el registro?' }
+      br/
+      = link_to 'Crear  Descuento', new_discount_path, class:'btn btn-primary'
+  

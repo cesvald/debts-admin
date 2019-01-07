@@ -1,0 +1,470 @@
+.container-fluid
+  .row.flex-xl-nowrap
+    .col-12.col-md-3.col-xl-2.bd-sidebar
+      form.bd-search.d-flex.align-items-center
+        span.algolia-autocomplete style=("position: relative; display: inline-block; direction: ltr;") 
+          input#search-input.form-control.ds-input aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" autocomplete="off" dir="auto" placeholder="Search..." role="combobox" spellcheck="false" style=("position: relative; vertical-align: top;") type="search" /
+        pre aria-hidden="true" style=("position: absolute; visibility: hidden; white-space: pre; font-family: -apple-system), BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;" 
+        span#algolia-autocomplete-listbox-0.ds-dropdown-menu role="listbox" style=("position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;") /
+        .ds-dataset-1
+        button.btn.btn-link.bd-search-docs-toggle.d-md-none.p-0.ml-3 aria-controls="bd-docs-nav" aria-expanded="false" aria-label=("Toggle docs navigation") data-target="#bd-docs-nav" data-toggle="collapse" type="button" 
+          svg focusable="false" height="30" viewbox=("0 0 30 30") width="30" xmlns="http://www.w3.org/2000/svg" 
+            title Menu
+            path d=("M4 7h22M4 15h22M4 23h22") stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" 
+      nav#bd-docs-nav.collapse.bd-links
+        .bd-toc-item.active
+          a.bd-toc-link href="/docs/4.0/getting-started/introduction/" 
+            | Getting started
+          ul.nav.bd-sidenav
+            li
+              a href="/docs/4.0/getting-started/introduction/" 
+                | Introduction
+            li.active.bd-sidenav-active
+              a href="/docs/4.0/getting-started/download/" 
+                | Download
+            li
+              a href="/docs/4.0/getting-started/contents/" 
+                | Contents
+            li
+              a href="/docs/4.0/getting-started/browsers-devices/" 
+                | Browsers &amp; devices
+            li
+              a href="/docs/4.0/getting-started/javascript/" 
+                | JavaScript
+            li
+              a href="/docs/4.0/getting-started/theming/" 
+                | Theming
+            li
+              a href="/docs/4.0/getting-started/build-tools/" 
+                | Build tools
+            li
+              a href="/docs/4.0/getting-started/webpack/" 
+                | Webpack
+            li
+              a href="/docs/4.0/getting-started/accessibility/" 
+                | Accessibility
+        .bd-toc-item
+          a.bd-toc-link href="/docs/4.0/layout/overview/" 
+            | Layout
+          ul.nav.bd-sidenav
+            li
+              a href="/docs/4.0/layout/overview/" 
+                | Overview
+            li
+              a href="/docs/4.0/layout/grid/" 
+                | Grid
+            li
+              a href="/docs/4.0/layout/media-object/" 
+                | Media object
+            li
+              a href="/docs/4.0/layout/utilities-for-layout/" 
+                | Utilities for layout
+        .bd-toc-item
+          a.bd-toc-link href="/docs/4.0/content/reboot/" 
+            | Content
+          ul.nav.bd-sidenav
+            li
+              a href="/docs/4.0/content/reboot/" 
+                | Reboot
+            li
+              a href="/docs/4.0/content/typography/" 
+                | Typography
+            li
+              a href="/docs/4.0/content/code/" 
+                | Code
+            li
+              a href="/docs/4.0/content/images/" 
+                | Images
+            li
+              a href="/docs/4.0/content/tables/" 
+                | Tables
+            li
+              a href="/docs/4.0/content/figures/" 
+                | Figures
+        .bd-toc-item
+          a.bd-toc-link href="/docs/4.0/components/alerts/" 
+            | Components
+          ul.nav.bd-sidenav
+            li
+              a href="/docs/4.0/components/alerts/" 
+                | Alerts
+            li
+              a href="/docs/4.0/components/badge/" 
+                | Badge
+            li
+              a href="/docs/4.0/components/breadcrumb/" 
+                | Breadcrumb
+            li
+              a href="/docs/4.0/components/buttons/" 
+                | Buttons
+            li
+              a href="/docs/4.0/components/button-group/" 
+                | Button group
+            li
+              a href="/docs/4.0/components/card/" 
+                | Card
+            li
+              a href="/docs/4.0/components/carousel/" 
+                | Carousel
+            li
+              a href="/docs/4.0/components/collapse/" 
+                | Collapse
+            li
+              a href="/docs/4.0/components/dropdowns/" 
+                | Dropdowns
+            li
+              a href="/docs/4.0/components/forms/" 
+                | Forms
+            li
+              a href="/docs/4.0/components/input-group/" 
+                | Input group
+            li
+              a href="/docs/4.0/components/jumbotron/" 
+                | Jumbotron
+            li
+              a href="/docs/4.0/components/list-group/" 
+                | List group
+            li
+              a href="/docs/4.0/components/modal/" 
+                | Modal
+            li
+              a href="/docs/4.0/components/navs/" 
+                | Navs
+            li
+              a href="/docs/4.0/components/navbar/" 
+                | Navbar
+            li
+              a href="/docs/4.0/components/pagination/" 
+                | Pagination
+            li
+              a href="/docs/4.0/components/popovers/" 
+                | Popovers
+            li
+              a href="/docs/4.0/components/progress/" 
+                | Progress
+            li
+              a href="/docs/4.0/components/scrollspy/" 
+                | Scrollspy
+            li
+              a href="/docs/4.0/components/tooltips/" 
+                | Tooltips
+        .bd-toc-item
+          a.bd-toc-link href="/docs/4.0/utilities/borders/" 
+            | Utilities
+          ul.nav.bd-sidenav
+            li
+              a href="/docs/4.0/utilities/borders/" 
+                | Borders
+            li
+              a href="/docs/4.0/utilities/clearfix/" 
+                | Clearfix
+            li
+              a href="/docs/4.0/utilities/close-icon/" 
+                | Close icon
+            li
+              a href="/docs/4.0/utilities/colors/" 
+                | Colors
+            li
+              a href="/docs/4.0/utilities/display/" 
+                | Display
+            li
+              a href="/docs/4.0/utilities/embed/" 
+                | Embed
+            li
+              a href="/docs/4.0/utilities/flex/" 
+                | Flex
+            li
+              a href="/docs/4.0/utilities/float/" 
+                | Float
+            li
+              a href="/docs/4.0/utilities/image-replacement/" 
+                | Image replacement
+            li
+              a href="/docs/4.0/utilities/position/" 
+                | Position
+            li
+              a href="/docs/4.0/utilities/screenreaders/" 
+                | Screenreaders
+            li
+              a href="/docs/4.0/utilities/sizing/" 
+                | Sizing
+            li
+              a href="/docs/4.0/utilities/spacing/" 
+                | Spacing
+            li
+              a href="/docs/4.0/utilities/text/" 
+                | Text
+            li
+              a href="/docs/4.0/utilities/vertical-align/" 
+                | Vertical align
+            li
+              a href="/docs/4.0/utilities/visibility/" 
+                | Visibility
+        .bd-toc-item
+          a.bd-toc-link href="/docs/4.0/extend/approach/" 
+            | Extend
+          ul.nav.bd-sidenav
+            li
+              a href="/docs/4.0/extend/approach/" 
+                | Approach
+            li
+              a href="/docs/4.0/extend/icons/" 
+                | Icons
+        .bd-toc-item
+          a.bd-toc-link href="/docs/4.0/migration/" 
+            | Migration
+          ul.nav.bd-sidenav
+        .bd-toc-item
+          a.bd-toc-link href="/docs/4.0/about/overview/" 
+            | About
+          ul.nav.bd-sidenav
+            li
+              a href="/docs/4.0/about/overview/" 
+                | Overview
+            li
+              a href="/docs/4.0/about/brand/" 
+                | Brand
+            li
+              a href="/docs/4.0/about/license/" 
+                | License
+            li
+              a href="/docs/4.0/about/translations/" 
+                | Translations
+    .d-none.d-xl-block.col-xl-2.bd-toc
+      ul.section-nav
+        li.toc-entry.toc-h2
+          a href="#compiled-css-and-js"  Compiled CSS and JS
+        li.toc-entry.toc-h2
+          a href="#source-files"  Source files
+        li.toc-entry.toc-h2
+          a href="#bootstrapcdn"  BootstrapCDN
+        li.toc-entry.toc-h2
+          a href="#package-managers"  Package managers
+          ul
+            li.toc-entry.toc-h3
+              a href="#npm"  npm
+            li.toc-entry.toc-h3
+              a href="#rubygems"  RubyGems
+            li.toc-entry.toc-h3
+              a href="#composer"  Composer
+            li.toc-entry.toc-h3
+              a href="#nuget"  NuGet
+    main.col-12.col-md-9.col-xl-8.py-md-3.pl-md-5.bd-content role="main" 
+      h1#content.bd-title Download
+      p.bd-lead Download Bootstrap to get the compiled CSS and JavaScript, source code, or include it with your favorite package managers like npm, RubyGems, and more.
+      script#_carbonads_js async="" src="https://cdn.carbonads.com/carbon.js?zoneid=1673&amp;serve=C6AILKT&amp;placement=getbootstrapcom" 
+      #carbonads
+        span
+          span.carbon-wrap
+            a.carbon-img href="//srv.carbonads.net/ads/click/x/GTND42QLCV7DE2Q7C6Y4YKQMCV7DCK77CKSILZ3JCW7D623WCA7I52JKC6BI6KJLFTBI6K3EHJNCLSIZ?segment=placement:getbootstrapcom;" rel="noopener" target="_blank" 
+              img alt="" border="0" height="100" src="//assets.servedby-buysellads.com/p/manage/asset/id/62568" style=("max-width: 130px;") width="130" /
+            a.carbon-text href="//srv.carbonads.net/ads/click/x/GTND42QLCV7DE2Q7C6Y4YKQMCV7DCK77CKSILZ3JCW7D623WCA7I52JKC6BI6KJLFTBI6K3EHJNCLSIZ?segment=placement:getbootstrapcom;" rel="noopener" target="_blank"  Instantly Run Manual, Visual &amp; Selenium Tests on Real Devices &amp; Browsers.
+          a.carbon-poweredby href="http://carbonads.net/?utm_source=getbootstrapcom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" rel="noopener" target="_blank"  ads via Carbon
+      h2#compiled-css-and-js/
+      div
+        | Compiled CSS and JS
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#compiled-css-and-js" style=("padding-left: 0.375em;") 
+      p
+        | Download ready-to-use compiled code for
+        strong Bootstrap v4.0.0
+        | to easily drop into your project, which includes:
+      ul
+        li
+          | Compiled and minified CSS bundles (see
+          = succeed ")" do
+            a href="/docs/4.0/getting-started/contents/#comparison-of-css-files"  CSS files comparison
+        li Compiled and minified JavaScript plugins
+      p This doesn’t include documentation, source files, or any optional JavaScript dependencies (jQuery and Popper.js).
+      p
+        a.btn.btn-bd-primary href="https://github.com/twbs/bootstrap/releases/download/v4.0.0/bootstrap-4.0.0-dist.zip" onclick="ga('send', 'event', 'Getting started', 'Download', 'Download Bootstrap');"  Download
+      h2#source-files/
+      div
+        | Source files
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#source-files" style=("padding-left: 0.375em;") 
+      p Compile Bootstrap with your own asset pipeline by downloading our source Sass, JavaScript, and documentation files. This option requires some additional tooling:
+      ul
+        li Sass compiler (Libsass or Ruby Sass is supported) for compiling your CSS.
+        li
+          a href="https://github.com/postcss/autoprefixer"  Autoprefixer
+          | for CSS vendor prefixing
+      p
+        | Should you require
+        = succeed "," do
+          a href="/docs/4.0/getting-started/build-tools/#tooling-setup"  build tools
+        | they are included for developing Bootstrap and its docs, but they’re likely unsuitable for your own purposes.
+      p
+        a.btn.btn-bd-primary href="https://github.com/twbs/bootstrap/archive/v4.0.0.zip" onclick="ga('send', 'event', 'Getting started', 'Download', 'Download source');"  Download source
+      h2#bootstrapcdn/
+      div
+        | BootstrapCDN
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#bootstrapcdn" style=("padding-left: 0.375em;") 
+      p
+        | Skip the download with
+        a href="https://www.bootstrapcdn.com/"  BootstrapCDN
+        | to deliver cached version of Bootstrap’s compiled CSS and JS to your project.
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-html data-lang="html" 
+            span.nt &lt;link
+            span.na rel=
+            span.s "stylesheet"
+            span.na href=
+            span.s "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            span.na integrity=
+            span.s "sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            span.na crossorigin=
+            span.s "anonymous"
+            span.nt &gt;
+            span.nt &lt;script
+            span.na src=
+            span.s "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            span.na integrity=
+            span.s "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            span.na crossorigin=
+            span.s "anonymous"
+            span.nt &gt;&lt;/script&gt;
+      p If you’re using our compiled JavaScript, don’t forget to include CDN versions of jQuery and Popper.js before it.
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-html data-lang="html" 
+            span.nt &lt;script
+            span.na src=
+            span.s "https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            span.na integrity=
+            span.s "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            span.na crossorigin=
+            span.s "anonymous"
+            span.nt &gt;&lt;/script&gt;
+            span.nt &lt;script
+            span.na src=
+            span.s "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            span.na integrity=
+            span.s "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            span.na crossorigin=
+            span.s "anonymous"
+            span.nt &gt;&lt;/script&gt;
+      h2#package-managers/
+      div
+        | Package managers
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#package-managers" style=("padding-left: 0.375em;") 
+      p
+        | Pull in Bootstrap’s
+        strong source files
+        | into nearly any project with some of the most popular package managers. No matter the package manager, Bootstrap will
+        strong
+          | require a Sass compiler and
+          a href="https://github.com/postcss/autoprefixer"  Autoprefixer
+        | for a setup that matches our official compiled versions.
+      h3#npm/
+      div
+        | npm
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#npm" style=("padding-left: 0.375em;") 
+      p
+        | Install Bootstrap in your Node.js powered apps with
+        = succeed ":" do
+          a href="https://www.npmjs.com/package/bootstrap"  the npm package
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-sh data-lang="sh" 
+            | npm
+            = succeed "bootstrap" do
+              span.nb install
+      p
+        code.highlighter-rouge require('bootstrap')
+        | will load all of Bootstrap’s jQuery plugins onto the jQuery object. The
+        code.highlighter-rouge bootstrap
+        | module itself does not export anything. You can manually load Bootstrap’s jQuery plugins individually by loading the
+        code.highlighter-rouge /js/*.js
+        | files under the package’s top-level directory.
+      p
+        | Bootstrap’s
+        code.highlighter-rouge package.json
+        | contains some additional metadata under the following keys:
+      ul
+        li
+          code.highlighter-rouge sass
+          | \- path to Bootstrap’s main
+          a href="http://sass-lang.com/"  Sass
+          | source file
+        li
+          code.highlighter-rouge style
+          | \- path to Bootstrap’s non-minified CSS that’s been precompiled using the default settings (no customization)
+      h3#rubygems/
+      div
+        | RubyGems
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#rubygems" style=("padding-left: 0.375em;") 
+      p
+        | Install Bootstrap in your Ruby apps using
+        a href="https://bundler.io/"  Bundler
+        | (
+        strong> recommended
+        | ) and
+        a href="https://rubygems.org/"  RubyGems
+        | by adding the following line to your
+        = succeed ":" do
+          a href="https://bundler.io/gemfile.html" 
+            code.highlighter-rouge Gemfile
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-ruby data-lang="ruby" 
+            span.n gem
+            span.s1 'bootstrap'
+            span.p ,
+            span.s1 '~&gt; 4.0.0'
+      p Alternatively, if you’re not using Bundler, you can install the gem by running this command:
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-sh data-lang="sh" 
+            | gem
+            = succeed "bootstrap" do
+              span.nb install
+            span.nt -v
+            | 4.0.0
+      p
+        a href="https://github.com/twbs/bootstrap-rubygem/blob/master/README.md"  See the gem’s README
+        | for further details.
+      h3#composer/
+      div
+        | Composer
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#composer" style=("padding-left: 0.375em;") 
+      p
+        | You can also install and manage Bootstrap’s Sass and JavaScript using
+        = succeed ":" do
+          a href="https://getcomposer.org/"  Composer
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-sh data-lang="sh"  composer require twbs/bootstrap:4.0.0
+      h3#nuget/
+      div
+        | NuGet
+        a.anchorjs-link aria-label="Anchor" data-anchorjs-icon="#" href="#nuget" style=("padding-left: 0.375em;") 
+      p
+        | If you develop in .NET, you can also install and manage Bootstrap’s
+        a href="https://www.nuget.org/packages/bootstrap/"  CSS
+        | or
+        a href="https://www.nuget.org/packages/bootstrap.sass/"  Sass
+        | and JavaScript using
+        = succeed ":" do
+          a href="https://www.nuget.org/"  NuGet
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-powershell data-lang="powershell"  Install-Package bootstrap
+      .bd-clipboard
+        button.btn-clipboard data-original-title=("Copy to clipboard") title=""  Copy
+      figure.highlight
+        pre
+          code.language-powershell data-lang="powershell"  Install-Package bootstrap.sass

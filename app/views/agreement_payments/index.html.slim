@@ -1,0 +1,32 @@
+p#notice = notice 
+h1 Acuerdos de Pago
+.container-fluid
+  .row
+    .col-4.col-xs-12
+      table.table
+        thead
+          tr
+            th Fecha de acuerdo
+            th Número de Cuotas
+            th Estatus
+            th Valor deuda
+            th Comentario
+            th Fecha de finalización
+            th Valor del acuerdo
+            th colspan="3" 
+        tbody
+          - @agreement_payments.each do |agreement_payment| 
+            tr
+              td = agreement_payment.started_at 
+              td = agreement_payment.number_quotas 
+              td = agreement_payment.canceled 
+              td = agreement_payment.amount_debt 
+              td = agreement_payment.comment 
+              td = agreement_payment.expired_at 
+              td = agreement_payment.amount 
+              td = link_to 'Mostrar', agreement_payment 
+              td = link_to 'Editar', edit_agreement_payment_path(agreement_payment) 
+              td = link_to 'Eliminar', agreement_payment, method: :delete, data:   {confirm: '¿Está seguro que dese eliminar el registro?'  } 
+      br/
+      = link_to 'Crear Acuerdo de Pago', new_agreement_payment_path , class:'btn btn-primary'
+

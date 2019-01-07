@@ -1,0 +1,73 @@
+#adm-background-container
+.separate-from-header
+	.container-fluid.adm-container
+		.page-header
+			h1="Iniciados"
+		.row
+			.col-md-12
+				= bootstrap_form_tag url: users_path, method: :get, layout: :inline do |f|
+					h3.form-subtitle= "Buscar Iniciados Por:"
+					= f.hidden_field :by_status, amount: params[:by_status]
+					= f.text_field :by_email, amount: params[:by_email], label: "Correo Electrónico"
+					= f.text_field :by_name, amount: params[:by_name], label: "Nombre"
+					= f.text_field :by_surname, amount: params[:by_surname], label: "Apellido"
+					- if current_user.admin?
+						= f.select :by_headquarter_id, options_for_select(Headquarter.order(name: :asc).pluck(:name, :id), params[:by_headquarter_id]), { label: "Sede", include_blank: true }
+					- else current_user.acom? || current_user.coor?
+						= f.hidden_field :by_headquarter_id, amount: current_user.group.headquarter.id
+					= f.select :by_group_id, options_for_select(@groups.order(name: :asc).pluck(:name, :id), params[:by_group_id]), { label: "Grupo", include_blank: true }
+					= f.select :by_level_id, options_for_select(Level.where(priority: 1).order(number: :asc).pluck(:name, :id), params[:by_level_id]), { label: "Nivel SKY", include_blank: true }
+					= f.select :by_level_two_id, options_for_select(Level.where(priority: 2).order(number: :asc).pluck(:name, :id), params[:by_level_two_id]), { label: "Nivel SKY 2", include_blank: true }
+					= f.select :by_pending_level_id, options_for_select(Level.where(priority: 2).order(number: :asc).pluck(:name, :id), params[:by_pending_level_id]), { label: "Nivel Pendiente", include_blank: true }
+					= f.select :by_lesson_id, options_for_select(Lesson.joins(:lesson_level).order(number: :asc).pluck("lessons.name || ' (' || lesson_levels.name || ' '  || lessons.number_level || ')'", :id), params[:by_lesson_id]), { label: "Lección", include_blank: true }
+					- if current_user.acom_outside?
+						= f.select :by_outside, options_for_select([["En la sede", 0], ["A distancia", 1]], params[:by_outside]), { label: "Ubicación", include_blank: true }
+					br
+					.text-center
+						= f.submit "Buscar Iniciados #{@status}"
+		br
+		.text-center
+			hr.break-line
+		
+		br
+		= link_to "Descargar Detalles de Deudas", detail_concept_payments_users_path({format: "xlsx"}), class: 'btn btn-default'
+		- if current_user.coor?
+			.text-right
+				= link_to "Descargar en Excel", users_path({format: "xlsx"}.merge(params)), class: 'btn btn-default pull-right'
+		.paginate-wrapper.pull-left
+			= paginate @users
+		table.table.table-striped
+			thead
+				tr
+					th Nombre
+					th Apellido
+					th Email
+					th Grupo
+					- if current_user.admin?
+						th Sede
+					th Nivel SKY
+					th Nivel SKY 2
+					th Lección SKY
+					th
+			tbody
+				- @users.each do |user|
+					- if current_user.admin? or user != current_user
+						tr
+							td = user.name
+							td = user.surname
+							td = user.email
+							td = user.group
+							- if current_user.admin?
+								td = (user.group ? user.group.headquarter : '')
+							td = user.level
+							td
+								- if user.level_two
+									= user.level_two
+									|&nbsp;
+									- unless user.pending_levels.empty?
+										span.text-danger= "(#{user.display_pending_levels})"
+							td = "#{user.lesson} (#{user.lesson.lesson_level} #{user.lesson.number_level})"
+						
+							td = link_to 'Ver deudas', debts_user_path(user)
+								
+			= paginate @users

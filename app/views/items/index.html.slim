@@ -1,0 +1,19 @@
+.page-header
+	h1 Conceptos
+	= link_to 'Nuevo Concepto', new_item_path, class:'btn btn-primary btn-header'
+.container-fluid
+  .row
+    .col-4.col-xs-12
+      table.table
+        thead
+          tr
+            th Nombre
+            th 
+        tbody
+          - @items.each do |item|
+            tr
+              td = item.name
+              td.actions
+                = link_to 'Editar', edit_item_path(item), class: "btn btn-xs btn-default"
+                |&nbsp;
+                = link_to "Eliminar", item, method: :delete, data: {confirm: "Estás seguro de eliminar este pago?"}, class: "btn btn-xs btn-danger"

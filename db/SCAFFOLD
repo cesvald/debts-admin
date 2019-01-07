@@ -1,0 +1,24 @@
+# migracion SOLO CREAR EL CAMPO MONEDA
+
+rails generate migration AddCurrencyToHeadquarter currency:string
+
+#MODELO NUEVO SISTEMA PAGOS
+
+rails generate scaffold Item name:string 
+
+rails generate scaffold ItemHeadquarter   registered_at:date value:number is_billable:boolean item:references headquarter:references   
+ 
+rails generate scaffold AgreementPayment started_at:date number_quotas:integer canceled:boolean value_debt:decimal comment:string expired_at:date value:decimal
+
+rails generate scaffold Debt value:decimal balance:decimal registered_at:date expired_at:date comment:string grace_months:integer is_billable:boolean item_headquarter:references user:references  agreement_payment:references state:string
+
+rails generate scaffold Discount discount_type:string discount_id:integer value:decimal registered_at:date comment:string 
+
+rails generate scaffold Payment value:decimal balance:decimal paid_at:date comment:string payment_type:string payment_id:integer
+
+rails generate scaffold Quota  agreement_payment:references number:integer state:string value:decimal 
+
+
+
+
+

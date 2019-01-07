@@ -1,0 +1,15 @@
+= bootstrap_form_for([@payable, @payment]) do |f|
+	.field.row
+		.col-xs-12.col-md-3
+			= f.text_field :paid_at 
+		.col-xs-12.col-md-3
+			= f.number_field :amount, step:'any', required: true
+		.field.col-lg-3
+			= f.select :method, options_for_select(["Efectivo", "Paypal", "Banco", "Otro"], f.object.method.nil? ? nil : f.object.method), required: true
+		.col-xs-12.col-md-3
+			= f.text_field :comment 
+	
+	.actions
+	  = f.submit nil, class: "btn btn-primary" 
+	 
+

@@ -1,0 +1,46 @@
+es:
+    activerecord:
+        models:
+            user: Usuario
+            item: Concepto
+            payment: Pago
+            debt: Deuda
+            agreement_payment: "Acuerdo de Pago"
+        attributes:
+            debt:
+                item_id: Concepto
+                amount: Valor
+                registered_at: Generada el
+                comment: Comentario
+            payment:
+                paid_at: "Pagado el"
+                amount: Valor
+                method: Medio
+                comment: Comentarios
+            agreement_payment:
+                started_at: "Empieza el"
+                amount_debt: "Valor de la Deuda"
+                comment: "Comentarios"
+                expired_at: "Termina el"
+                amount: "Valor nueva Deuda"
+                state: "Estado"
+            quota:
+                expected_at: "Pago esperado el"
+                amount: Valor
+    
+    agreement_payment_status:
+        opened: 'Abierto'
+        completed: 'Cerrado'
+        canceled: 'Cancelado'
+        
+    date:
+        formats:
+            date: "%d/%m/%Y"
+    helpers:
+        actions: "Acciones"
+        links:
+            edit: "Editar"
+            destroy: "Eliminar"
+            new: "Nuevo"
+            confirm: "Confirmación"
+            book: "Reservar"

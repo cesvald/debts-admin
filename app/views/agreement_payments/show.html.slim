@@ -1,0 +1,24 @@
+p#notice = notice 
+p
+  strong Started at:
+  | = @agreement_payment.started_at 
+p
+  strong Number quotas:
+  | = @agreement_payment.number_quotas 
+p
+  strong Canceled:
+  | = @agreement_payment.canceled 
+p
+  strong amount debt:
+  | = @agreement_payment.amount_debt 
+p
+  strong Comment:
+  | = @agreement_payment.comment 
+p
+  strong Expired at:
+  | = @agreement_payment.expired_at 
+p
+  strong amount:
+  | = @agreement_payment.amount 
+= link_to 'Edit', edit_agreement_payment_path(@agreement_payment)  \
+| = link_to 'Back', agreement_payments_path 

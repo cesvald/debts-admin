@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_debt: 9.99
+  total_payment: 
+  total_discount: 
+  user_id: 
+
+two:
+  total_debt: 9.99
+  total_payment: 
+  total_discount: 
+  user_id: 

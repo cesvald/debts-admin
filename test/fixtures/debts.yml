@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 9.99
+  balance: 9.99
+  registered_at: 2018-03-24
+  expired_at: 2018-03-24
+  comment: MyString
+  grace_months: 1
+  is_billable: false
+  item_headquarter_id: 
+  user_id: 
+  agreement_payment_id: 
+  state: MyString
+
+two:
+  value: 9.99
+  balance: 9.99
+  registered_at: 2018-03-24
+  expired_at: 2018-03-24
+  comment: MyString
+  grace_months: 1
+  is_billable: false
+  item_headquarter_id: 
+  user_id: 
+  agreement_payment_id: 
+  state: MyString

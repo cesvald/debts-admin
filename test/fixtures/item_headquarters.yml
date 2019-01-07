@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 9.99
+  registered_at: 2018-03-22
+  is_billable: false
+  item_id: 
+  headquarter_id: 
+
+two:
+  value: 9.99
+  registered_at: 2018-03-22
+  is_billable: false
+  item_id: 
+  headquarter_id: 

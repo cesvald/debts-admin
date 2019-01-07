@@ -1,0 +1,13 @@
+doctype html
+html
+	head
+		title Workspace
+		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+		= javascript_include_tag 'application', 'data-turbolinks-track' => true
+		= csrf_meta_tags 
+	body [data-namespace="#{namespace}" data-controller="#{controller_name}" data-action="#{action_name}"]
+		= render partial: "layouts/header"
+		.container-fluid.customize-container
+			= render partial: 'layouts/flash', locals: { flash: flash } unless flash.empty?
+			= yield
+		= include_gon

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>amount:</strong>
+  <%= @item_headquarter.amount %>
+</p>
+
+<p>
+  <strong>Registered at:</strong>
+  <%= @item_headquarter.registered_at %>
+</p>
+
+<p>
+  <strong>Is billable:</strong>
+  <%= @item_headquarter.is_billable %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @item_headquarter.item %>
+</p>
+
+<p>
+  <strong>Headquarter:</strong>
+  <%= @item_headquarter.headquarter %>
+</p>
+
+<%= link_to 'Edit', edit_item_headquarter_path(@item_headquarter) %> |
+<%= link_to 'Back', item_headquarters_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  discount_type: MyString
+  discount_id: 1
+  value: 9.99
+  registered_at: 2018-03-24
+  comment: MyString
+
+two:
+  discount_type: MyString
+  discount_id: 1
+  value: 9.99
+  registered_at: 2018-03-24
+  comment: MyString

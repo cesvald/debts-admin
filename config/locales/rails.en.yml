@@ -1,0 +1,9 @@
+en:
+    date:
+        am: am
+        formats:
+          default: "%d/%m/%Y"
+          long: "%-d de %B"
+          short: "%-d de %b"
+          date: "%d/%m/%Y"
+        pm: pm

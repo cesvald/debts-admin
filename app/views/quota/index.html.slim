@@ -1,0 +1,25 @@
+p#notice = notice 
+h1 Cuotas por Acuerdo
+.container-fluid
+  .row
+    .col-4.col-xs-12
+      table.table
+        thead
+          tr
+            th Acuerdo de pago
+            th Número de cuota
+            th Estatus
+            th Valor
+            th colspan="7" 
+        tbody
+          - @quota.each do |quotum| 
+            tr
+              td = quotum.agreement_payment.canceled
+              td = quotum.number 
+              td = quotum.state 
+              td = quotum.amount 
+              td = link_to 'Mostrar', quotum 
+              td = link_to 'Editar', edit_quotum_path(quotum) 
+              td = link_to 'Eliminar', quotum, method: :delete, data:  { confirm: 'Are you sure?' }
+      br/
+      = link_to 'New Quotum', new_quotum_path, class:'btn btn-primary'

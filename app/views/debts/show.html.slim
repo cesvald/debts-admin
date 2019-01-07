@@ -1,0 +1,67 @@
+p#notice = notice 
+p
+  strong Usuario:
+  = @debt.user 
+p
+  strong Moneda:
+  = @debt.item_headquarter.headquarter.currency
+
+p
+  strong Valor:
+  = @debt.amount 
+p
+  strong Saldo:
+  = @debt.total_balance
+p
+  strong Fecha de registro:
+  = @debt.registered_at 
+p
+  strong Fecha de vencimiento:
+  = @debt.expired_at 
+p
+  strong Comentarios:
+  = @debt.comment 
+p
+  strong Meses de Gracia:
+  = @debt.grace_months 
+p
+  strong Es facturable:
+  = @debt.is_billable 
+p
+  strong Concepto:
+  = @debt.item_headquarter.item.name
+
+p
+  strong Sede:
+  = @debt.item_headquarter.headquarter 
+
+p
+  strong Acuerdo de Pago:
+  = @debt.agreement_payment 
+p
+  strong Estado:
+  = @debt.state
+  
+  
+table.table.table-actions
+  thead
+    th Pagado el
+    th Valor
+    th Comentarios
+    th
+    th
+  tbody
+    - @debt.payments.each do |payment|
+      tr
+        td=payment.paid_at
+        td=payment.amount
+        td=payment.comment
+        td=link_to 'Eliminar', [@user, @debt, payment], method: :delete, data:  { confirm: 'Are you sure?' }  
+        td=link_to 'Editar', edit_user_debt_payment_path(@user,@debt,payment) 
+    tr
+      td Total pagos realizados:
+      td=@debt.total_payments
+    
+= link_to 'Realizar pago', new_user_debt_payment_path(@user, @debt)
+= link_to 'Modificar', edit_user_debt_path(@user, @debt)
+= link_to 'Atras', user_debts_path(@user) 

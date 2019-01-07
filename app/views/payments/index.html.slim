@@ -1,0 +1,30 @@
+p#notice = notice 
+h1 Pagos
+.container-fluid
+  .row
+    .col-4.col-xs-12
+      table.table
+        thead
+          tr
+            th Valor
+            th Saldo
+            th Fecha de pago
+            th Comentario
+            th Tipo de Pago
+            th Id de Pago
+            th colspan="9" 
+        tbody
+          - @payments.each do |payment| 
+            tr
+              td = payment.amount 
+              td = payment.balance 
+              td = payment.paid_at 
+              td = payment.comment 
+              td = payment.payment_type 
+              td = payment.payment_id 
+              td = link_to 'Mostrar', payment 
+              td = link_to 'Editar', edit_payment_path(payment) 
+              td = link_to 'Eliminar', payment, method: :delete, data:  { confirm: 'Are you sure?' }   
+      	  
+      br/   
+      = link_to 'Crear pagos', new_payment_path, class:'btn btn-primary'

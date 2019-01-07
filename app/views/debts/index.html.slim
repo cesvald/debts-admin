@@ -1,0 +1,110 @@
+.page-header
+	h4= @user.full_name
+	= link_to 'Información personal', edit_user_path(@user), class: "btn btn-primary btn-header btn-xs small-link"
+
+h5.table-title Deudas
+|&nbsp;
+= link_to "Adicionar Deuda", new_user_general_debt_debt_path(@user, @general_debt), class: 'btn btn-primary btn-xs'
+- if not @general_debt.opened_agreement?
+	|&nbsp;
+	|&nbsp;
+	= link_to "Crear acuerdo de pago", new_general_debt_agreement_payment_path(@general_debt), class: "btn btn-default btn-xs"
+
+table.table.table-actions
+	thead
+		tr
+			th Generada el
+			th Concepto
+			th Valor
+			th Descripción
+			th
+			th
+	- @general_debt.debts.each do |debt|
+		tr
+			td= l debt.registered_at, format: :date
+			td= debt.item
+			td= to_currency debt.amount
+			td= debt.comment 
+			td.actions
+				= link_to "Editar", edit_user_debt_path(@user, debt), class: "btn btn-xs btn-default"
+				|&nbsp;
+				= link_to "Eliminar", [@user, debt], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
+
+br
+br
+h5.table-title Pagos de Deudas
+|&nbsp;
+= link_to "Adicionar Pago", new_general_debt_payment_path(@general_debt), class: 'btn btn-primary btn-xs'
+table.table.table-actions
+	thead
+		tr
+			th Pagado el
+			th Valor
+			th Medio
+			th Descripción
+			th
+			th
+	- @general_debt.payments.each do |payment|
+		tr
+			td= l payment.paid_at, format: :date
+			td= to_currency payment.amount
+			td= payment.method
+			td= payment.comment
+			td.actions
+				= link_to "Editar", edit_user_payment_path(@user, payment), class: "btn btn-xs btn-default"
+				|&nbsp;
+				= link_to "Eliminar", [@user, payment], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
+
+br
+br
+h5.table-title Acuerdos de Pago
+|&nbsp;
+table.table.table-actions
+	thead
+		tr
+			th Empieza el
+			th Termina el
+			th Nueva Deuda
+			th Deuda Inicial
+			th Número de Cuotas
+			th Pago Total
+			th Comentarios
+			th Estado
+	- @general_debt.agreement_payments.each do |agreement_payment|
+		tr
+			td= l agreement_payment.started_at, format: :date
+			td= l agreement_payment.expired_at, format: :date
+			td= to_currency agreement_payment.amount, agreement_payment.headquarter.currency
+			td= to_currency agreement_payment.amount_debt, agreement_payment.headquarter.currency
+			td= agreement_payment.total_quotas
+			td= to_currency agreement_payment.total_payment
+			td= agreement_payment.comment
+			td= t "agreement_payment_status.#{agreement_payment.state}"
+			td.actions
+				= link_to "Editar", edit_user_agreement_payment_path(@user, agreement_payment), class: "btn btn-xs btn-default"
+				|&nbsp;
+				= link_to "Eliminar", [@user, agreement_payment], method: :delete, data: {confirm: "Estás seguro de eliminar este acuerdo de pago?"}, class: "btn btn-xs btn-danger"
+
+
+	br
+	.row
+		.col-md-offset-2.col-md-8
+			table.table.summary-table
+				thead
+					tr
+						th
+							h5.table-title Resumen de un vistazo
+						th
+				tr
+					td Total Deudas
+					td= to_currency @general_debt.total_debt
+				tr.payment
+					td Total Pagos
+					td= to_currency :agreement_payments.total_payment
+				tr.total-due
+					td
+						b Total
+					td
+						b= to_currency :agreement_payments.due
+						
+	= link_to "Descargar Detalle de Deudas", detail_debts_user_path(@user, {format: "xlsx"}), class: 'btn btn-default'

@@ -1,0 +1,2 @@
+module ItemHeadquartersHelper
+end

@@ -1,0 +1,17 @@
+xlsx_package.use_shared_strings = true
+wb = xlsx_package.workbook
+table_header = wb.styles.add_style b: true, alignment: {horizontal: :center}
+table_cell = wb.styles.add_style alignment: {horizontal: :center}
+title = wb.styles.add_style b: true, sz: 14
+wb.add_worksheet(name: "Usuarios - deudas") do |sheet|
+    sheet.add_row ["Nombre", "Apellido", "Email", "Concepto","Moneda", "Valor", "Descuentos","Total Pagos", "Saldo"], style: table_header
+    @user.debts.each do |debt|
+        sheet.add_row [@user.name, @user.surname, @user.email, debt.item_headquarter.item.name,  debt.item_headquarter.headquarter.currency,debt.amount,debt.total_discounts, debt.total_payments, debt.total_balance]
+    end
+    sheet.add_row [" "], style: table_header
+    sheet.add_row ["Resumen por moneda: "], style: table_header
+    sheet.add_row ["Moneda", "Valor adeudado", "Descuentos realizados","Pagos realizados", "Saldo"], style: table_header
+    @user.total_debts_by_currency.each do |row|
+        sheet.add_row [row["currency"],td=row["debt"],td=row["discount"],td=row["payment"],td=row["balance"]]
+    end
+end

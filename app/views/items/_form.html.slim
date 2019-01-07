@@ -1,0 +1,7 @@
+= bootstrap_form_for @item do |f| 
+	.field.col-lg-3
+		= f.text_field :name, required: true
+	= f.hidden_field :headquarter_id, value: current_user.group.headquarter.id
+	.row
+	= f.submit "Crear", class:'btn btn-primary'
+

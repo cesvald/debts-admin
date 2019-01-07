@@ -1,0 +1,27 @@
+p#notice = notice 
+h1 Conceptos por Sede
+.container-fluid
+  .row
+    .col-4.col-xs-12
+      table.table
+        thead
+          tr
+            th Valor
+            th Fecha de registro
+            th Es facturable
+            th Concepto
+            th Sede
+            th colspan="8" 
+        body
+          - @item_headquarters.each do |item_headquarter| 
+            tr
+              td = item_headquarter.amount 
+              td = item_headquarter.registered_at 
+              td = item_headquarter.is_billable 
+              td = item_headquarter.item.name 
+              td = item_headquarter.headquarter 
+              td = link_to 'Mostrar', item_headquarter 
+              td = link_to 'Editar', edit_item_headquarter_path(item_headquarter) 
+              td = link_to 'Elimiar', item_headquarter, method: :delete, data:  { confirm: 'Está seguro que dese eliminar el registro?' }
+      br/
+      = link_to 'Crear concepto por sede', new_item_headquarter_path, class:'btn btn-primary'
