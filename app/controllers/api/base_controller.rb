@@ -7,8 +7,9 @@ class Api::BaseController < ActionController::Base
     before_action :check_auth_token
     
     def check_auth_token
-        values = request.headers["content_type"].split(//).map {|ch|  (ch.ord - 'A'.ord + 10) * Configuration[:token_code].to_i}
-        if request.headers["access_token"] != values.inject(0){|sum,x| sum + x }
+        values = params[:public_key].split(//).map {|ch| (ch.ord - 'A'.ord + 10) * ::Configuration[:token_code].to_i}
+        if params[:access_token].to_i != values.inject(0){|sum,x| sum + x }
+            p "Ok, no coinsidence"
             render json: {
               error: "auth_token invalid",
               status: 401
