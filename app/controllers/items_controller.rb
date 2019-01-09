@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   end
   
   def index
-		@items = params[:q] ? (current_user.admin? ? Item.by_name("%#{params[:q]}%") : Item.by_name("%#{params[:q]}%").by_headquarter_id(current_user.headquarter.id)) : apply_scopes(@items).order(:name).page(params[:page])
+		@items = params[:q] ? (current_user.admin? ? Item.by_name("%#{params[:q]}%") : Item.by_name("%#{params[:q]}%").by_headquarter_id(current_user.headquarter.id)) : Item.order(:name).page(params[:page])
 	
 		respond_to do |format|
 			format.html

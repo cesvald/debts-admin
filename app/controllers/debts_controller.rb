@@ -24,6 +24,10 @@ class DebtsController < ApplicationController
     update! { url_for session[:back_url] }
   end
   
+  def destroy
+    destroy! { url_for session[:back_url] }
+  end
+  
   def import
 		excel = params[:file]
         import_results='INICIO ------------------------:   '

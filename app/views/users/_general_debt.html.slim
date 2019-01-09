@@ -1,10 +1,6 @@
 h5.table-title Deudas
 |&nbsp;
 = link_to "Adicionar Deuda", new_general_debt_debt_path(@general_debt), class: 'btn btn-primary btn-xs'
-- if not @general_debt.opened_agreement?
-	|&nbsp;
-	|&nbsp;
-	= link_to "Crear acuerdo de pago", new_general_debt_agreement_payment_path(@general_debt), class: "btn btn-default btn-xs"
 
 table.table.table-actions
 	thead
@@ -23,15 +19,15 @@ table.table.table-actions
 			td= to_currency debt.amount, debt.item.headquarter.currency
 			td= debt.comment 
 			td.actions
-				= link_to "Editar", edit_general_debt_debt_path(@user, debt), class: "btn btn-xs btn-default"
+				= link_to "Editar", edit_general_debt_debt_path(@user, debt, tab: "#general-debt"), class: "btn btn-xs btn-default"
 				|&nbsp;
-				= link_to "Eliminar", [@general_debt, debt], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
+				= link_to "Eliminar", [@general_debt, debt, tab: "#general-debt"], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
 
 br
 br
 h5.table-title Pagos
 |&nbsp;
-= link_to "Adicionar Pago", new_general_debt_payment_path(@general_debt), class: 'btn btn-primary btn-xs'
+= link_to "Adicionar Pago", new_general_debt_payment_path(@general_debt, tab: "#general-debt"), class: 'btn btn-primary btn-xs'
 table.table.table-actions
 	thead
 		tr
@@ -49,15 +45,17 @@ table.table.table-actions
 			td= payment.comment
 			td.actions
 				- if payment.method != "Acuerdo de Pago"
-					= link_to "Editar", edit_general_debt_payment_path(@user, payment), class: "btn btn-xs btn-default"
+					= link_to "Editar", edit_general_debt_payment_path(@user, payment, tab: "#general-debt"), class: "btn btn-xs btn-default"
 					|&nbsp;
-					= link_to "Eliminar", [@general_debt, payment], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
+					= link_to "Eliminar", [@general_debt, payment, tab: "#general-debt"], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
 
 
 br
 br
 h5.table-title Acuerdos de Pago
-|&nbsp;
+- if not @general_debt.opened_agreement?
+	|&nbsp;
+	= link_to "Crear acuerdo de pago", new_general_debt_agreement_payment_path(@general_debt, tab: "#general-debt"), class: "btn btn-primary btn-xs"
 table.table.table-actions
 	thead
 		tr
@@ -83,9 +81,9 @@ table.table.table-actions
 			td= t "agreement_payment_status.#{agreement_payment.state}"
 			td.actions
 				- if agreement_payment.opened?
-					= link_to "Editar", edit_general_debt_agreement_payment_path(@general_debt, agreement_payment), class: "btn btn-xs btn-default"
+					= link_to "Editar", edit_general_debt_agreement_payment_path(@general_debt, agreement_payment, tab: "#general-debt"), class: "btn btn-xs btn-default"
 					|&nbsp;
-					= link_to "Eliminar", [@general_debt, agreement_payment], method: :delete, data: {confirm: "Estás seguro de eliminar este acuerdo de pago?"}, class: "btn btn-xs btn-danger"
+					= link_to "Eliminar", [@general_debt, agreement_payment, tab: "#general-debt"], method: :delete, data: {confirm: "Estás seguro de eliminar este acuerdo de pago?"}, class: "btn btn-xs btn-danger"
 				- else
 					= link_to "Ver", edit_general_debt_agreement_payment_path(@general_debt, agreement_payment), class: "btn btn-xs btn-primary"
 

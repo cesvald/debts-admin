@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery_nested_form
-//= require bootstrap-datepicker
 //= require moment
 //= require moment/es
 //= require bootstrap-datetimepicker

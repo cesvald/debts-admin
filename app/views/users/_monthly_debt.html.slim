@@ -18,7 +18,7 @@ table.table.table-actions
 			td= to_currency period.amount
 			td= to_currency period.total_amount 
 			td.actions
-				= link_to "Eliminar", [@monthly_debt, period], method: :delete, data: {confirm: "Estás seguro de eliminar este periodo de deuda"}, class: "btn btn-xs btn-danger"
+				= link_to "Eliminar", [@monthly_debt, period, tab: "#monthly-debt"], method: :delete, data: {confirm: "Estás seguro de eliminar este periodo de deuda"}, class: "btn btn-xs btn-danger"
 
 br
 br
@@ -51,7 +51,6 @@ br
 br
 h5.table-title Acuerdos de Pago
 - if not @monthly_debt.opened_agreement?
-	|&nbsp;
 	|&nbsp;
 	= link_to "Crear acuerdo de pago", new_monthly_debt_agreement_payment_path(@monthly_debt, tab: "#monthly-debt"), class: "btn btn-primary btn-xs"
 table.table.table-actions

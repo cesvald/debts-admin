@@ -8,6 +8,7 @@ class Debts.Views.AgreementPaymentsNewEdit extends Backbone.View
         )
         
         $('#agreement_payment_expired_at').datetimepicker(
+            format: 'DD/MM/Y',
             useCurrent: false
         )
         
