@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107015049) do
+ActiveRecord::Schema.define(version: 20190107025805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,15 @@ ActiveRecord::Schema.define(version: 20190107015049) do
   add_index "books", ["level_id"], name: "index_books_on_level_id", using: :btree
   add_index "books", ["title"], name: "index_books_on_title", using: :btree
 
+  create_table "carts", force: :cascade do |t|
+    t.date     "purchased_at"
+    t.integer  "user_id",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "carts", ["user_id"], name: "index_carts_on_user_id", using: :btree
+
   create_table "chapters", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.integer  "start_page"
@@ -112,12 +121,12 @@ ActiveRecord::Schema.define(version: 20190107015049) do
   end
 
   create_table "debt_periods", force: :cascade do |t|
-    t.decimal  "amount"
+    t.decimal  "amount",          default: 0.0
     t.date     "started_at"
-    t.integer  "months"
     t.integer  "monthly_debt_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "months",          default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "debt_periods", ["monthly_debt_id"], name: "index_debt_periods_on_monthly_debt_id", using: :btree
@@ -151,6 +160,16 @@ ActiveRecord::Schema.define(version: 20190107015049) do
   add_index "discounts", ["discountable_type", "discountable_id"], name: "index_discounts_on_discountable_type_and_discountable_id", using: :btree
   add_index "discounts", ["headquarter_id"], name: "index_discounts_on_headquarter_id", using: :btree
 
+  create_table "events", force: :cascade do |t|
+    t.string   "name",                        null: false
+    t.text     "description",                 null: false
+    t.string   "image",                       null: false
+    t.date     "life_at",                     null: false
+    t.boolean  "visible",     default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "general_debts", force: :cascade do |t|
     t.decimal  "total_debt",    default: 0.0
     t.decimal  "total_payment", default: 0.0
@@ -166,19 +185,26 @@ ActiveRecord::Schema.define(version: 20190107015049) do
     t.string   "name"
     t.integer  "headquarter_id"
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.boolean  "is_outside"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "is_outside",     default: false
   end
 
   add_index "groups", ["headquarter_id"], name: "index_groups_on_headquarter_id", using: :btree
   add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
 
   create_table "headquarters", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
+    t.string   "name",               limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "currency",   limit: 3
+    t.string   "mailchimp_group_id"
+    t.string   "currency",           limit: 3
+  end
+
+  create_table "initiations", force: :cascade do |t|
+    t.date     "started_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
@@ -292,7 +318,7 @@ ActiveRecord::Schema.define(version: 20190107015049) do
   add_index "main_pages", ["level_id"], name: "index_main_pages_on_level_id", using: :btree
 
   create_table "monthly_debts", force: :cascade do |t|
-    t.decimal  "total_payment"
+    t.decimal  "total_payment", default: 0.0
     t.decimal  "deposit",       default: 0.0
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
@@ -317,17 +343,25 @@ ActiveRecord::Schema.define(version: 20190107015049) do
 
   add_index "notifications", ["start_date"], name: "index_notifications_on_start_date", using: :btree
 
+  create_table "payment_notifications", force: :cascade do |t|
+    t.text    "params",         null: false
+    t.integer "cart_id",        null: false
+    t.string  "status",         null: false
+    t.string  "transaction_id", null: false
+  end
+
+  add_index "payment_notifications", ["cart_id"], name: "index_payment_notifications_on_cart_id", using: :btree
+
   create_table "payments", force: :cascade do |t|
     t.date     "paid_at"
     t.decimal  "amount"
     t.string   "method"
     t.string   "comment"
-    t.boolean  "covered",        default: false
     t.integer  "payable_id"
     t.string   "payable_type"
     t.integer  "headquarter_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "payments", ["headquarter_id"], name: "index_payments_on_headquarter_id", using: :btree
@@ -343,11 +377,37 @@ ActiveRecord::Schema.define(version: 20190107015049) do
 
   add_index "photos", ["album_id"], name: "index_photos_on_album_id", using: :btree
 
+  create_table "products", force: :cascade do |t|
+    t.decimal  "price",            null: false
+    t.string   "purchasable_type", null: false
+    t.integer  "purchasable_id",   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "products_users", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "user_id"
+  end
+
+  add_index "products_users", ["product_id"], name: "index_products_users_on_product_id", using: :btree
+  add_index "products_users", ["user_id"], name: "index_products_users_on_user_id", using: :btree
+
   create_table "profiles", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "publications", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "start_page"
+    t.integer "end_page"
+    t.string  "name"
+    t.boolean "visible"
+  end
+
+  add_index "publications", ["book_id"], name: "index_publications_on_book_id", using: :btree
 
   create_table "quota", force: :cascade do |t|
     t.integer  "agreement_payment_id"
@@ -435,7 +495,6 @@ ActiveRecord::Schema.define(version: 20190107015049) do
     t.string   "surname",                limit: 255
     t.integer  "lesson_id"
     t.integer  "level_id"
-    t.integer  "headquarter_id"
     t.boolean  "is_confirmed",                       default: false
     t.integer  "level_two_id"
     t.integer  "group_id"
@@ -443,12 +502,16 @@ ActiveRecord::Schema.define(version: 20190107015049) do
     t.boolean  "outside",                            default: false
     t.integer  "group_outside_id"
     t.integer  "status",                             default: 0
+    t.integer  "failed_attempts",                    default: 0,                     null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.integer  "initiation_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree
   add_index "users", ["group_outside_id"], name: "index_users_on_group_outside_id", using: :btree
-  add_index "users", ["headquarter_id"], name: "index_users_on_headquarter_id", using: :btree
+  add_index "users", ["initiation_id"], name: "index_users_on_initiation_id", using: :btree
   add_index "users", ["lesson_id"], name: "index_users_on_lesson_id", using: :btree
   add_index "users", ["level_id"], name: "index_users_on_level_id", using: :btree
   add_index "users", ["level_two_id"], name: "index_users_on_level_two_id", using: :btree
@@ -486,6 +549,7 @@ ActiveRecord::Schema.define(version: 20190107015049) do
   add_foreign_key "agreement_payments", "headquarters"
   add_foreign_key "audios", "levels"
   add_foreign_key "books", "levels"
+  add_foreign_key "carts", "users"
   add_foreign_key "chapters", "sections", name: "fk_chapters_section_id"
   add_foreign_key "comments", "users", name: "fk_comments_user_id"
   add_foreign_key "debt_periods", "monthly_debts"
@@ -509,8 +573,12 @@ ActiveRecord::Schema.define(version: 20190107015049) do
   add_foreign_key "live_links", "lessons"
   add_foreign_key "main_pages", "levels", on_update: :cascade, on_delete: :cascade
   add_foreign_key "monthly_debts", "users"
+  add_foreign_key "payment_notifications", "carts"
   add_foreign_key "payments", "headquarters"
   add_foreign_key "photos", "albums", name: "fk_photos_album_id"
+  add_foreign_key "products_users", "products"
+  add_foreign_key "products_users", "users"
+  add_foreign_key "publications", "books"
   add_foreign_key "quota", "agreement_payments"
   add_foreign_key "roles", "profiles", name: "fk_roles_profile_id"
   add_foreign_key "roles", "users", name: "fk_roles_user_id"
@@ -519,7 +587,7 @@ ActiveRecord::Schema.define(version: 20190107015049) do
   add_foreign_key "swamis", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users", "groups", column: "group_outside_id"
   add_foreign_key "users", "groups", on_update: :cascade, on_delete: :nullify
-  add_foreign_key "users", "headquarters", name: "fk_users_headquarter_id"
+  add_foreign_key "users", "initiations"
   add_foreign_key "users", "lessons", name: "fk_users_lesson_id"
   add_foreign_key "users", "levels", column: "level_two_id"
   add_foreign_key "users", "levels", name: "fk_users_level_id"

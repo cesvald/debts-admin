@@ -1,28 +1,28 @@
 .page-header
 	h4= @user.full_name
-	= link_to 'Información personal', edit_user_path(@user), class: "btn btn-primary btn-header btn-xs small-link"
+	= link_to 'Información personal', @user, class: "btn btn-primary btn-header btn-xs small-link"
 	
 	br
 	br
 	
-	/! Nav tabs
-	ul.nav.nav-tabs role="tablist" 
-		li.active role="presentation" 
-			a aria-controls="home" data-toggle="tab" href="#general-debt" role="tab"
-				| Deudas Generales
-		li role="presentation" 
-			a aria-controls="profile" data-toggle="tab" href="#monthly-debt" role="tab"
-				| Mensualidades
-	
-	/! Tab panes
-	.tab-content
-		#general-debt.tab-pane.fade.in.active role="tabpanel"
-			br
-			= render 'general_debt'
-	
-	.tab-content
-		#monthly-debt.tab-pane.fade.in.active role="tabpanel"
-			br
-			= render 'monthly_debt'
-	
-	
+	div
+		/! Nav tabs
+		ul.nav.nav-tabs role="tablist" 
+			li.active role="presentation" 
+				a aria-controls="home" data-toggle="tab" href="#general-debt" role="tab"
+					| Deudas Generales
+			li role="presentation" 
+				a aria-controls="profile" data-toggle="tab" href="#monthly-debt" role="tab"
+					| Mensualidades
+		
+		/! Tab panes
+		.tab-content
+			#general-debt.tab-pane.fade.in.active role="tabpanel"
+				br
+				= render 'general_debt'
+		
+			#monthly-debt.tab-pane.fade role="tabpanel"
+				br
+				= render 'monthly_debt'
+		
+		

@@ -1,0 +1,27 @@
+h1 Listing debt_periods
+
+table
+  thead
+    tr
+      th Amount
+      th Started at
+      th Monthly debt
+      th Months
+      th
+      th
+      th
+
+  tbody
+    - @debt_periods.each do |debt_period|
+      tr
+        td = debt_period.amount
+        td = debt_period.started_at
+        td = debt_period.monthly_debt
+        td = debt_period.months
+        td = link_to 'Show', debt_period
+        td = link_to 'Edit', edit_debt_period_path(debt_period)
+        td = link_to 'Destroy', debt_period, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Debt period', new_debt_period_path

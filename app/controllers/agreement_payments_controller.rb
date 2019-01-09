@@ -6,19 +6,25 @@ class AgreementPaymentsController < ApplicationController
   skip_before_action :set_parent, only: [:close, :cancel]
   
   def create
-    create! do |success, failure|
-      success.html {
-        redirect_to debts_user_path(@parent.user)
-      }
-    end
+    create! { url_for session[:back_url] }
+  end
+  
+  def new
+    session[:back_url] = "#{request.referer}#{params[:tab] if params[:tab]}"
+    new!
+  end
+  
+  def edit
+    session[:back_url] = "#{request.referer}#{params[:tab] if params[:tab]}"
+    edit!
   end
   
   def update
-    update! { debts_user_path(@parent.user) }
+    update! { url_for session[:back_url] }
   end
-  
+
   def destroy
-    destroy! { debts_user_path(@parent.user) }
+    destroy! { request.referer + params["tab"]}
   end
   
   def close

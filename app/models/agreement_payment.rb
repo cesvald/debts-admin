@@ -6,7 +6,7 @@ class AgreementPayment < ActiveRecord::Base
 	has_many :payments, as: :payable
 	belongs_to :headquarter
 	belongs_to :general_debt, :foreign_key => "general_debts_id"
-	belongs_to :monthly_debt
+	belongs_to :monthly_debt, :foreign_key => "monthly_debts_id"
 	
 	scope :state, -> (state) { where(state: state) }
 	

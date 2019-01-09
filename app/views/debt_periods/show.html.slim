@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Amount:
+  = @debt_period.amount
+p
+  strong Started at:
+  = @debt_period.started_at
+p
+  strong Monthly debt:
+  = @debt_period.monthly_debt
+p
+  strong Months:
+  = @debt_period.months
+
+=> link_to 'Edit', edit_debt_period_path(@debt_period)
+'|
+=< link_to 'Back', debt_periods_path

@@ -7,14 +7,14 @@
 			.col-md-12
 				= bootstrap_form_tag url: users_path, method: :get, layout: :inline do |f|
 					h3.form-subtitle= "Buscar Iniciados Por:"
-					= f.hidden_field :by_status, amount: params[:by_status]
-					= f.text_field :by_email, amount: params[:by_email], label: "Correo Electrónico"
-					= f.text_field :by_name, amount: params[:by_name], label: "Nombre"
-					= f.text_field :by_surname, amount: params[:by_surname], label: "Apellido"
+					= f.hidden_field :by_status, value: params[:by_status]
+					= f.text_field :by_email, value: params[:by_email], label: "Correo Electrónico"
+					= f.text_field :by_name, value: params[:by_name], label: "Nombre"
+					= f.text_field :by_surname, value: params[:by_surname], label: "Apellido"
 					- if current_user.admin?
 						= f.select :by_headquarter_id, options_for_select(Headquarter.order(name: :asc).pluck(:name, :id), params[:by_headquarter_id]), { label: "Sede", include_blank: true }
 					- else current_user.acom? || current_user.coor?
-						= f.hidden_field :by_headquarter_id, amount: current_user.group.headquarter.id
+						= f.hidden_field :by_headquarter_id, value: current_user.group.headquarter.id
 					= f.select :by_group_id, options_for_select(@groups.order(name: :asc).pluck(:name, :id), params[:by_group_id]), { label: "Grupo", include_blank: true }
 					= f.select :by_level_id, options_for_select(Level.where(priority: 1).order(number: :asc).pluck(:name, :id), params[:by_level_id]), { label: "Nivel SKY", include_blank: true }
 					= f.select :by_level_two_id, options_for_select(Level.where(priority: 2).order(number: :asc).pluck(:name, :id), params[:by_level_two_id]), { label: "Nivel SKY 2", include_blank: true }
@@ -24,7 +24,7 @@
 						= f.select :by_outside, options_for_select([["En la sede", 0], ["A distancia", 1]], params[:by_outside]), { label: "Ubicación", include_blank: true }
 					br
 					.text-center
-						= f.submit "Buscar Iniciados #{@status}"
+						= f.submit "Buscar Iniciados"
 		br
 		.text-center
 			hr.break-line
@@ -46,8 +46,8 @@
 					- if current_user.admin?
 						th Sede
 					th Nivel SKY
-					th Nivel SKY 2
 					th Lección SKY
+					th Total Deuda
 					th
 			tbody
 				- @users.each do |user|
@@ -60,14 +60,8 @@
 							- if current_user.admin?
 								td = (user.group ? user.group.headquarter : '')
 							td = user.level
-							td
-								- if user.level_two
-									= user.level_two
-									|&nbsp;
-									- unless user.pending_levels.empty?
-										span.text-danger= "(#{user.display_pending_levels})"
-							td = "#{user.lesson} (#{user.lesson.lesson_level} #{user.lesson.number_level})"
-						
-							td = link_to 'Ver deudas', debts_user_path(user)
+							td = "#{user.lesson.lesson_level} #{user.lesson.number_level}"
+							td = user.monthly_debt.nil? ? to_currency(0) : to_currency(user.due)
+							td = link_to 'Ver deudas', debts_user_path(user), class: "btn btn-primary btn-xs"
 								
 			= paginate @users

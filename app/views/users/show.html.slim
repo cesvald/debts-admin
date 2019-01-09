@@ -1,0 +1,28 @@
+.page-header
+	h4= "#{@user.full_name} (#{@user.email})" 
+.container
+	.row
+		.col-md-4.offset-md-2.col-xs-12
+			= bootstrap_form_for @user do |f|
+				- if current_user.admin?
+					.form-group
+						label.control-label= "Sede"
+						= text_field_tag :headquarter, @user.group.headquarter, { label: "Sede", class: "form-control", readonly: true}
+					.form-group
+						label.control-label= "grupo"
+						= text_field_tag :group, @user.group, { class: "form-control", readonly: true}
+				- elsif current_user.coor?
+					.form-group
+						label.control-label= "grupo"
+						= text_field_tag :group, @user.group, { class: "form-control", readonly: true}
+				.form-group
+					label.control-label= "Nivel SKY"
+					= text_field_tag :level_id, @user.level.name, {:class => "form-control", readonly: true}
+				.form-group
+					label.control-label= "Nivel SKY 2"
+					= text_field_tag :level_id, @user.level_two.nil? ? "" : @user.level_two.name, {:class => "form-control", readonly: true}
+				.form-group
+					label.control-label= "Lección"
+					= text_field_tag :lesson_id, "#{@user.lesson.name} (#{@user.lesson.lesson_level.name} #{@user.lesson.number_level})",{ class: "form-control", readonly: true}
+
+= link_to "Volver", debts_user_path(@user), class: "btn btn-default"

@@ -17,7 +17,7 @@ table.table.table-actions
 			th
 	= @general_debt.deposit
 	- @general_debt.debts.each do |debt|
-		tr class=("covered" if debt.covered)
+		tr
 			td= l debt.registered_at, format: :date
 			td= debt.item
 			td= to_currency debt.amount, debt.item.headquarter.currency
@@ -90,28 +90,28 @@ table.table.table-actions
 					= link_to "Ver", edit_general_debt_agreement_payment_path(@general_debt, agreement_payment), class: "btn btn-xs btn-primary"
 
 
-	br
-	.row
-		.col-md-offset-2.col-md-8
-			table.table.summary-table
-				thead
-					tr
-						th
-							h5.table-title Resumen de un vistazo
-						th
+br
+.row
+	.col-md-offset-2.col-md-8
+		table.table.summary-table
+			thead
 				tr
-					td Total Deudas
-					td= to_currency @general_debt.total_debt
-				tr.payment
-					td Total Pagos
-					td= to_currency @general_debt.total_payment
-				tr.payment
-					td Total Descuentos
-					td= to_currency @general_debt.total_discount
-				tr.total-due
-					td
-						b Total
-					td
-						b= to_currency @general_debt.due
+					th
+						h5.table-title Resumen de un vistazo
+					th
+			tr
+				td Total Deudas
+				td= to_currency @general_debt.total_debt
+			tr.payment
+				td Total Pagos
+				td= to_currency @general_debt.total_payment
+			tr.payment
+				td Total Descuentos
+				td= to_currency @general_debt.total_discount
+			tr.total-due
+				td
+					b Total
+				td
+					b= to_currency @general_debt.due
 						
 	= link_to "Descargar Detalle de Deudas", detail_debts_user_path(@user, {format: "xlsx"}), class: 'btn btn-default'

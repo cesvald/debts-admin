@@ -1,0 +1,10 @@
+= bootstrap_form_for([@monthly_debt, @debt_period]) do |f|
+  .field.row
+    .col-xs-12.col-md-3
+      = f.text_field :started_at
+    .col-xs-12.col-md-3
+      = f.number_field :amount, step: 'any', append: @debt_period.monthly_debt.user.group.headquarter.currency
+  
+  
+  .actions
+    = f.submit nil, class:"btn btn-primary"

@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  resources :debt_periods
   devise_for :users
   get 'home/index'
 
+  namespace :api do
+    resources :users
+    resources :groups
+    resources :headquarters
+  end
+  
   resources :users do
     collection do
       get 'detail_concept_payments'
@@ -32,10 +39,12 @@ Rails.application.routes.draw do
   
   resources :monthly_debts do
     resources :payments
+    resources :debt_periods
     resources :agreement_payments do
       resources :debts
       resources :payments
     end
+    
   end
   
   root 'users#index'

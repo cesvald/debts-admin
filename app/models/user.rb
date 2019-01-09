@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 	belongs_to :lesson
 	
 	has_one :swami
+	belongs_to :initiation
 	
 	has_one :general_debt
 	has_one :monthly_debt
@@ -106,5 +107,9 @@ class User < ActiveRecord::Base
 		          
 		results = ActiveRecord::Base.connection.execute(@query)
 		return results
+	end
+	
+	def due
+		monthly_debt.due + general_debt.due
 	end
 end

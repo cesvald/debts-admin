@@ -1,7 +1,7 @@
 class CreateMonthlyDebts < ActiveRecord::Migration
   def change
     create_table :monthly_debts do |t|
-      t.decimal :total_payment
+      t.decimal :total_payment, default: 0
       t.decimal :deposit, default: 0
       t.belongs_to :user, index: true, foreign_key: true
     

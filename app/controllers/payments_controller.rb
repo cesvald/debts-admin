@@ -5,16 +5,16 @@ class PaymentsController < ApplicationController
   before_action :set_parent
   
   def create
-    create! { url_for "#{session[:back_url]}#payments" }
+    create! { url_for session[:back_url] }
   end
   
   def new
-    session[:back_url] = request.referer
+    session[:back_url] = "#{request.referer}#{params[:tab] if params[:tab]}"
     new!
   end
   
   def edit
-    session[:back_url] = request.referer
+    session[:back_url] = "#{request.referer}#{params[:tab] if params[:tab]}"
     edit!
   end
   
@@ -23,7 +23,7 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
-    destroy! { redirect_to request.referer }
+    destroy! { request.referer + params["tab"]}
   end
   
   private

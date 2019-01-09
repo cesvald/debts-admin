@@ -1,7 +1,7 @@
 = bootstrap_form_for([@payable, @payment]) do |f|
 	.field.row
 		.col-xs-12.col-md-3
-			= f.text_field :paid_at 
+			= f.text_field :paid_at, required: true
 		.col-xs-12.col-md-3
 			= f.number_field :amount, step:'any', required: true
 		.field.col-lg-3
