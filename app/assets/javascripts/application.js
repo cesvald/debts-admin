@@ -15,8 +15,8 @@
 //= require jquery_nested_form
 //= require moment
 //= require moment/es
-//= require bootstrap-datetimepicker
 //= require bootstrap-sprockets
+//= require bootstrap-datetimepicker
 //= require underscore
 //= require backbone
 //= require debts
