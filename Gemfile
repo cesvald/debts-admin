@@ -43,8 +43,7 @@ gem 'axlsx_rails'
 
 
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '3.3.7'
-gem 'sassc-rails', '>= 2.0.0'
+gem 'bootstrap'
 gem "bootstrap_flash_messages"
 gem 'bootstrap_form'
 
