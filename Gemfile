@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.2.2'
 
 gem 'backbone-rails'
 
+gem 'autoprefixer-rails'
 # Rails-JQuery nested manager
 gem "nested_form"
 gem 'gon'

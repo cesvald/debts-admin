@@ -48,6 +48,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.4)
+    autoprefixer-rails (8.2.0)
+      execjs
     axlsx_rails (0.5.2)
       actionpack (>= 3.1)
       axlsx (>= 2.0.1)
@@ -262,6 +264,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  autoprefixer-rails
   axlsx!
   axlsx_rails
   backbone-rails
