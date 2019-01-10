@@ -16,7 +16,6 @@ gem 'coffee-rails', '~> 4.2.2'
 
 gem 'backbone-rails'
 
-gem 'autoprefixer-rails'
 # Rails-JQuery nested manager
 gem "nested_form"
 gem 'gon'
@@ -44,12 +43,10 @@ gem 'axlsx_rails'
 
 
 # Use SCSS for stylesheets
-gem "less-rails"
-gem "therubyracer"
+gem 'bootstrap-sass', '3.3.7'
+gem 'sassc-rails', '>= 2.0.0'
 gem "bootstrap_flash_messages"
 gem 'bootstrap_form'
-gem "twitter-bootstrap-rails"
-gem "sass-rails"
 
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'

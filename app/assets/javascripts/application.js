@@ -12,11 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require jquery_nested_form
 //= require moment
 //= require moment/es
 //= require bootstrap-datetimepicker
+//= require bootstrap-sprockets
 //= require underscore
 //= require backbone
 //= require debts
