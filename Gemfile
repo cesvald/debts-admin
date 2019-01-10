@@ -58,6 +58,8 @@ gem "nested_form"
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 
+gem 'sprockets-rails'
+
 # Authentication
 gem 'devise', '~> 4.5.0'
 
