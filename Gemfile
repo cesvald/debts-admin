@@ -43,7 +43,8 @@ gem 'axlsx_rails'
 
 
 # Use SCSS for stylesheets
-gem 'bootstrap'
+gem 'bootstrap-sass', '3.3.7'
+gem 'sassc-rails', '>= 2.0.0'
 gem "bootstrap_flash_messages"
 gem 'bootstrap_form'
 
@@ -58,8 +59,6 @@ gem "nested_form"
 # HTML manipulation and formatting
 gem 'formtastic'
 gem 'formtastic-bootstrap'
-
-gem 'sprockets-rails'
 
 # Authentication
 gem 'devise', '~> 4.5.0'
