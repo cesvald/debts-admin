@@ -1,7 +1,6 @@
 class DiscountsController < ApplicationController
   inherit_resources
   belongs_to :user, :agreement_payment, :polymorphic => true
-  end
   
   def create
     create! { url_for session[:back_url] }
