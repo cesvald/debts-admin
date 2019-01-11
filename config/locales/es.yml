@@ -1,51 +1,68 @@
 es:
-    activerecord:
-        models:
-            user: Usuario
-            item: Concepto
-            payment: Pago
-            debt: Deuda
-            agreement_payment: "Acuerdo de Pago"
-            debt_period: "Período de Pago"
-        attributes:
-            debt:
-                item_id: Concepto
-                amount: Valor
-                registered_at: Generada el
-                comment: Comentario
-            payment:
-                paid_at: "Pagado el"
-                amount: Valor
-                method: Medio
-                comment: Comentarios
-            agreement_payment:
-                started_at: "Empieza el"
-                amount_debt: "Valor de la Deuda"
-                comment: "Comentarios"
-                expired_at: "Termina el"
-                amount: "Valor nueva Deuda"
-                state: "Estado"
-            quota:
-                expected_at: "Pago esperado el"
-                amount: Valor
-            debt_period:
-                amount: "Valor Mensual"
-                started_at: "Empieza el"
-                
-    agreement_payment_status:
-        opened: 'Abierto'
-        completed: 'Cerrado'
-        canceled: 'Cancelado'
+  activerecord:
+    models:
+      user: Usuario
+      item: Concepto
+      payment: Pago
+      debt: Deuda
+      agreement_payment: "Acuerdo de Pago"
+      debt_period: "Período de Pago"
+    attributes:
+      debt:
+        item_id: Concepto
+        amount: Valor
+        registered_at: Generada el
+        comment: Comentario
+      payment:
+        paid_at: "Pagado el"
+        amount: Valor
+        method: Medio
+        comment: Comentarios
+      agreement_payment:
+        started_at: "Empieza el"
+        amount_debt: "Valor de la Deuda"
+        comment: "Comentarios"
+        expired_at: "Termina el"
+        amount: "Valor nueva Deuda"
+        state: "Estado"
+      quota:
+        expected_at: "Pago esperado el"
+        amount: Valor
+      debt_period:
+        amount: "Valor Mensual"
+        started_at: "Empieza el"
         
-    date:
-        formats:
-            date: "%d/%m/%Y"
-            month_year: "%B %Y"
+  agreement_payment_status:
+    opened: 'Abierto'
+    completed: 'Cerrado'
+    canceled: 'Cancelado'
+    
+  date:
+    formats:
+      date: "%d/%m/%Y"
+      month_year: "%B %Y"
+  helpers:
+    actions: "Acciones"
+    links:
+      edit: "Editar"
+      destroy: "Eliminar"
+      new: "Nuevo"
+      confirm: "Confirmación"
+      book: "Reservar"
+  
+  views:
+    pagination:
+      first: "&laquo; Primera"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Ant"
+      next: "Sig &rsaquo;"
+      truncate: "&hellip;"
     helpers:
-        actions: "Acciones"
-        links:
-            edit: "Editar"
-            destroy: "Eliminar"
-            new: "Nuevo"
-            confirm: "Confirmación"
-            book: "Reservar"
+    page_entries_info:
+      one_page:
+      display_entries:
+        zero: "No se encontró %{entry_name}"
+        one: "Mostrando <b>1</b> %{entry_name}"
+        other: "Mostrando <b>total %{count}</b> %{entry_name}"
+    more_pages:
+      display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> en total"
