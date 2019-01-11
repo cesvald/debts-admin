@@ -2,6 +2,8 @@ require 'csv'
 class ItemsController < ApplicationController
   inherit_resources
   
+  has_scope :by_name
+  
   def create
     create! { items_path }
   end
@@ -11,7 +13,7 @@ class ItemsController < ApplicationController
   end
   
   def index
-		@items = params[:q] ? (current_user.admin? ? Item.by_name("%#{params[:q]}%") : Item.by_name("%#{params[:q]}%").by_headquarter_id(current_user.headquarter.id)) : Item.order(:name).page(params[:page])
+		@items = end_of_association_chain.order(:name).page(params[:page])
 	
 		respond_to do |format|
 			format.html
