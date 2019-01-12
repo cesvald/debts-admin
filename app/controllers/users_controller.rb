@@ -94,7 +94,7 @@ class UsersController < ApplicationController
         row_headers = row
         index = 1
         while row[index] != "end" do
-          if Item.by_name(row_headers[index]).first.nil?
+          if Item.where(name: row_headers[index]).first.nil?
             @errors = "#{row_headers[index]} no existe como concepto"
             render :import_new
             return false
@@ -103,14 +103,14 @@ class UsersController < ApplicationController
         end
       else
         index = 1
-        user = User.by_email(row[0]).first
+        user = User.where(email: row[0]).first
         general_debt = user.general_debt.nil? ? user.create_general_debt() : user.general_debt
         while row[index] != "end" do
           if !row[index].blank? and row[index] != "0"
             @debt = Debt.new()
             @debt.amount = row[index]
             @debt.registered_at = "15/05/#{row_headers[index].split(" ").last}".to_date
-            @debt.item = Item.by_name(row_headers[index]).first
+            @debt.item = Item.where(name: row_headers[index]).first
             @debt.debable = general_debt
             @debt.save!
           end
