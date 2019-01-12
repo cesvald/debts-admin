@@ -5,6 +5,7 @@ window.Debts =
   Routers: {}
   initialize: ->
   	controller = $('body').data('controller')
+  	console.log(controller)
   	new Debts.Routers.MDebts() if controller == "debts"
   	new Debts.Routers.Payments() if controller == "payments"
   	new Debts.Routers.AgreementPayments() if controller == "agreement_payments"

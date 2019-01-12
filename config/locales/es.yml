@@ -31,6 +31,8 @@ es:
       debt_period:
         amount: "Valor Mensual"
         started_at: "Empieza el"
+      item:
+        name: "Nombre"
         
   agreement_payment_status:
     opened: 'Abierto'

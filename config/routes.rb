@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get 'detail_concept_payments'
+      get 'import_new'
+      post 'import_general_debts'
     end
     member do
       get 'detail_debts'
@@ -54,13 +56,6 @@ Rails.application.routes.draw do
       post 'import'
       get 'import_new'
     end
-  end
-  
-  resources :debts do
-    collection do
-      post 'import'
-      get 'import_new'
-     end
   end
   
   

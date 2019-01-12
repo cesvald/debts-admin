@@ -1,0 +1,14 @@
+.content
+  .row
+    .col-xs-8.col-xs-offset-2
+      h3 Importar Deudas Generales
+      = form_tag import_general_debts_users_path(), multipart: true do |f|
+        .form-group
+          = label_tag :file
+          = file_field_tag :file
+          br
+          .actions = submit_tag
+    
+      br
+      - if @errors
+        = @errors

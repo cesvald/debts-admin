@@ -110,6 +110,6 @@ class User < ActiveRecord::Base
 	end
 	
 	def due
-		monthly_debt.due + general_debt.due
+		monthly_debt.due + general_debt.due unless general_debt.nil?
 	end
 end

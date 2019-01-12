@@ -11,13 +11,12 @@ table.table.table-actions
 			th Descripción
 			th
 			th
-	= @general_debt.deposit
 	- @general_debt.debts.each do |debt|
 		tr
 			td= l debt.registered_at, format: :date
 			td= debt.item
 			td= to_currency debt.amount, debt.item.headquarter.currency
-			td= debt.comment 
+			td= debt.comment
 			td.actions
 				= link_to "Editar", edit_general_debt_debt_path(@user, debt, tab: "#general-debt"), class: "btn btn-xs btn-default"
 				|&nbsp;

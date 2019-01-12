@@ -5,6 +5,7 @@ class Debt < ActiveRecord::Base
   validates :amount, presence: true
   validates :registered_at, presence: true
   validates :item, presence: true
+  validates :debable, presence: true
   
   after_create :sum_total_debt
   after_destroy :less_total_debt

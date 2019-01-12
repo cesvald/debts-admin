@@ -18,8 +18,4 @@ class GeneralDebt < ActiveRecord::Base
 	def due
 		total_debt - total_payment - total_discount
 	end
-	
-	def all_debts
-		 #Debt.joins('INNER JOIN agreement_payments ON debts.debable_id = agreement_payments.id').where("(agreement_payments"."general_debts_id" = $1 AND "payments"."payable_type" = $2) OR (debts.debable_id = ? AND debts.dabable_type = ?)")
-	end
 end
