@@ -110,7 +110,7 @@ class UsersController < ApplicationController
             @debt = Debt.new()
             @debt.amount = row[index]
             @debt.registered_at = "15/05/#{row_headers[index].split(" ").last}".to_date
-            @debt.item = Item.where(name: row_headers[index]).first
+            @debt.item = Item..where('name ILIKE :name', {name: "#{row_headers[index]}"}).first
             @debt.debable = general_debt
             @debt.save!
           end
