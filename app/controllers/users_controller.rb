@@ -94,7 +94,7 @@ class UsersController < ApplicationController
         row_headers = row
         index = 1
         while row[index] != "end" do
-          if Item.where(name: row_headers[index]).first.nil?
+          if Item.where('name ILIKE :name', {name: "#{row_headers[index]}"}).first.nil?
             @errors = "#{row_headers[index]} no existe como concepto"
             render :import_new
             return false
