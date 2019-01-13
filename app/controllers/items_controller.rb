@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
   
   def index
-		@items = end_of_association_chain.order(:name).page(params[:page])
+		@items = params[:q] ? Item.by_name(params[:q]).order(:name).limit(10) : end_of_association_chain.order(:name).page(params[:page])
 	
 		respond_to do |format|
 			format.html
