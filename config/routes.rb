@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pay_periods
   resources :debt_periods
   devise_for :users
   get 'home/index'
@@ -9,7 +10,11 @@ Rails.application.routes.draw do
     resources :headquarters
   end
   
+  resources :payments, only: :destroy
+  resources :debts, only: :destroy
+  
   resources :users do
+    resources :agreement_payments
     collection do
       get 'detail_concept_payments'
       get 'import_new'
@@ -33,20 +38,11 @@ Rails.application.routes.draw do
   resources :general_debts do
     resources :debts
     resources :payments
-    resources :agreement_payments do
-      resources :debts
-      resources :payments
-    end
   end
   
   resources :monthly_debts do
-    resources :payments
+    resources :pay_periods
     resources :debt_periods
-    resources :agreement_payments do
-      resources :debts
-      resources :payments
-    end
-    
   end
   
   root 'users#index'

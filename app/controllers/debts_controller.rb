@@ -1,7 +1,7 @@
 class DebtsController < ApplicationController
   inherit_resources
   
-  belongs_to :general_debt, :monthly_debt, :agreement_payment, polymorphic: true
+  belongs_to :general_debt, :monthly_debt, :agreement_payment, polymorphic: true, optional: true
   
   before_action :set_parent
   
@@ -29,7 +29,7 @@ class DebtsController < ApplicationController
   
   private
     def set_parent
-      @debtable = parent
+      @parent = parent
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

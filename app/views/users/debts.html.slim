@@ -1,5 +1,6 @@
 .page-header
-	h4= @user.full_name
+	h4= "#{@user.full_name} (#{@user.email})"
+	|&nbsp;
 	= link_to 'Información personal', @user, class: "btn btn-primary btn-header btn-xs small-link"
 	
 	br
@@ -8,21 +9,79 @@
 	div
 		/! Nav tabs
 		ul.nav.nav-tabs role="tablist" 
-			li.active role="presentation" 
-				a aria-controls="home" data-toggle="tab" href="#general-debt" role="tab"
+			li.active role="presentation"
+				a aria-controls="general-debt" data-toggle="tab" href="#general-debt" role="tab"
 					| Deudas Generales
-			li role="presentation" 
-				a aria-controls="profile" data-toggle="tab" href="#monthly-debt" role="tab"
+			li role="presentation"
+				a aria-controls="monthly-debt" data-toggle="tab" href="#monthly-debt" role="tab"
 					| Mensualidades
+			li role="presentation"
+				a aria-controls="agreement-payments" data-toggle="tab" href="#agreement-payments" role="tab"
+					| Acuerdos de Pago
+			li role="presentation"
+				a aria-controls="summary" data-toggle="tab" href="#summary" role="tab"
+					| Resumen de un Vistazo
 		
 		/! Tab panes
 		.tab-content
 			#general-debt.tab-pane.fade.in.active role="tabpanel"
 				br
 				= render 'general_debt'
-		
 			#monthly-debt.tab-pane.fade role="tabpanel"
 				br
 				= render 'monthly_debt'
-		
-		
+			#agreement-payments.tab-pane.fade role="tabpanel"
+				br
+				= render 'agreement_payment'
+			#summary.tab-pane.fade role="tabpanel"
+				.row
+					.col-md-offset-2.col-md-8
+						table.table.summary-table
+							thead
+								tr
+									th
+										h5.table-title Resumen de un vistazo
+									th
+							tr.subheader
+								td Deudas Generales Nuevas
+								td 
+							tr
+								td Deudas Generales Nuevas
+								td= to_currency @user.general_debt.total_debt
+							tr.payment
+								td Pagos Generales Nuevos
+								td= to_currency  @user.general_debt.total_payment
+							tr.subtotal
+								td
+								td= "Subtotal #{to_currency @user.general_debt.due}"
+						    tr.subheader
+								td Mensualidades Nuevas
+								td 
+							tr
+								td Mensualidades Nuevas
+								td= to_currency @user.monthly_debt.total_debt
+							tr.payment
+								td Pagos Mensualidades Nuevos
+								td= to_currency  @user.monthly_debt.total_payment
+							tr.subtotal
+								td
+								td= "Subtotal #{to_currency @user.monthly_debt.due}"
+						    - if @opened_agreement
+			    				tr.subheader
+			    					td Acuerdo de Pago
+			    					td 
+			    				tr
+			    					td Total Acuerdo
+			    					td= to_currency @opened_agreement.amount
+			    				tr.payment
+			    					td Pago Acuerdo
+			    					td= to_currency @opened_agreement.total_payment
+			    				tr.subtotal
+			    					td
+			    					td= "Subtotal #{to_currency @opened_agreement.due}"
+							tr.total-due
+								td
+									b Total
+								td
+									b= to_currency @user.due
+	

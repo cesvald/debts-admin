@@ -1,0 +1,22 @@
+h5.table-title
+    = title.nil? ? "Pagos" : title 
+|&nbsp;
+- if actions
+    = link_to "Adicionar Pago", link_add, class: 'btn btn-primary btn-xs'
+table.table.table-actions
+	thead
+		tr
+			th Pagado el
+			th Valor
+			th Medio
+			th Comentario
+			th
+	- payments.each do |payment|
+		tr
+			td= l payment.paid_at, format: :date
+			td= to_currency payment.amount, payment.headquarter.currency
+			td= payment.method
+			td= payment.comment
+			td.actions
+				- if actions
+					= link_to "Eliminar", [payment, tab: tab], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"

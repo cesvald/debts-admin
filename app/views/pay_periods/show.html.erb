@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @pay_period.amount %>
+</p>
+
+<p>
+  <strong>Started at:</strong>
+  <%= @pay_period.started_at %>
+</p>
+
+<p>
+  <strong>Debt period:</strong>
+  <%= @pay_period.debt_period %>
+</p>
+
+<p>
+  <strong>Monthly debt:</strong>
+  <%= @pay_period.monthly_debt %>
+</p>
+
+<p>
+  <strong>Months:</strong>
+  <%= @pay_period.months %>
+</p>
+
+<%= link_to 'Edit', edit_pay_period_path(@pay_period) %> |
+<%= link_to 'Back', pay_periods_path %>

@@ -1,0 +1,27 @@
+h5.table-title= title
+|&nbsp;
+- if actions
+	= link_to "Adicionar Periodo de Pago", new_monthly_debt_pay_period_path(@monthly_debt), class: 'btn btn-primary btn-xs'
+
+table.table.table-actions
+	thead
+		tr
+			th Fecha de Pago
+			th Pagado desde
+			th Pagado hasta
+			th Meses de pago
+			th Valor por mes
+			th total
+			th
+			th
+	- periods.each_with_index do |period, index|
+		tr
+			td= l(period.paid_at, format: :month_year).camelize
+			td= l(period.started_at, format: :month_year).camelize
+			td= l(period.finished_at, format: :month_year).camelize
+			td= period.months
+			td= to_currency period.amount
+			td= to_currency period.total_amount 
+			td.actions
+				- if index == 0 and actions
+					= link_to "Eliminar", [period, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar este periodo de pago?"}, class: "btn btn-xs btn-danger"

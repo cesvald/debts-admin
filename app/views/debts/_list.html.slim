@@ -1,0 +1,23 @@
+h5.table-title= title
+|&nbsp;
+- if actions
+    = link_to "Adicionar Deuda", link_add, class: 'btn btn-primary btn-xs'
+
+table.table.table-actions
+	thead
+		tr
+			th Generada el
+			th Concepto
+			th Valor
+			th Descripción
+			th
+			th
+	- debts.each do |debt|
+		tr
+			td= l debt.registered_at, format: :date
+			td= debt.item
+			td= to_currency debt.amount, debt.item.headquarter.currency
+			td= debt.comment
+			td.actions
+			    - if actions
+				    = link_to "Eliminar", [debt, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar esta deuda?"}, class: "btn btn-xs btn-danger"

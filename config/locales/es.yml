@@ -7,6 +7,7 @@ es:
       debt: Deuda
       agreement_payment: "Acuerdo de Pago"
       debt_period: "Período de Pago"
+      pay_period: "Periodo de Pago"
     attributes:
       debt:
         item_id: Concepto
@@ -31,12 +32,17 @@ es:
       debt_period:
         amount: "Valor Mensual"
         started_at: "Empieza el"
+      pay_period:
+        amount: "Valor Mensual"
+        started_at: "Pagado desde"
+        paid_at: "Fecha de Pago"
+        months: "Meses"
       item:
         name: "Nombre"
         
   agreement_payment_status:
     opened: 'Abierto'
-    completed: 'Cerrado'
+    completed: 'Completado'
     canceled: 'Cancelado'
     
   date:

@@ -55,7 +55,7 @@ div
     font-size: 12px
     list-style: square
     
-a.btn-primary:visited
+a.btn-primary:visited, a.btn-success:visited, a.btn-danger:visited
   color: white
 
 .nav-tabs a:hover
@@ -81,3 +81,89 @@ a.btn-primary:visited
   display: inline-block
   margin: 0px
   margin-top: 3px
+  
+.page-header h4
+  display: inline-block
+  vertical-align: super
+  
+.table
+  &.summary-table.margin-top-none
+    thead
+      th
+        padding-top: 0px
+        
+  &.summary-table > tbody > tr > td:nth-child(2)
+    text-align: right
+  > tbody > tr
+    &.subheader td
+      background-color: #FAFAFA
+      border: 1px solid #d8d8d8
+      border-left: none
+      border-right: none
+      color: #696c72
+      font-size: 0.9em
+      font-weight: bold
+    &.subtotal td
+      color: #5A5A5A
+      font-weight: bold
+    &.payment td
+      color: #27AE60
+    &.total-due td
+      color: black
+      font-weight: bold
+      font-size: 14px
+    > td
+      vertical-align: middle
+    &.payment
+      color: #27AE60
+  &.table-actions > tbody > tr
+    > td:last-child > a
+      visibility: hidden
+    &:hover > td:last-child > a
+      visibility: visible
+
+h5.table-title
+  font-weight: bold
+  display: inline-block
+  font-size: 15px
+  &.margin-top-none
+    margin-top: 0px
+    
+td.completed
+  color: #27AE60
+
+td.canceled
+  color: #AE2727
+  
+td.opened
+  color: #6E5BAA
+  
+.border-right
+  border-right: solid 1px #eeeeee
+  
+.flash
+  position: fixed
+  top: 2%
+  width: 90%
+
+.agreement-state
+  display: inline-block
+  padding: 10px 15px
+  text-transform: uppercase
+  vertical-align: bottom
+  &.state-completed
+    color: #27AE60
+    border: solid 1px #27AE60
+  &.state-canceled
+    color: #AE2727
+    border: solid 1px #AE2727
+
+ul.nav.nav-tabs
+  &.completed
+    li
+      a
+        color: #27AE60
+  &.canceled
+    li
+      a
+        color: #AE2727

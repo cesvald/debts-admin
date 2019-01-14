@@ -1,0 +1,37 @@
+h5.table-title Acuerdos de Pago
+- if not @user.opened_agreement?
+	|&nbsp;
+	= link_to "Crear acuerdo de pago", new_user_agreement_payment_path(@user, tab: "#agreement-payments"), class: "btn btn-primary btn-xs"
+table.table.table-actions
+	thead
+		tr
+			th Empieza el
+			th Termina el
+			th Cuotas
+			th Deuda Inicial
+			th Nueva Deuda
+			th Pagos
+			th Faltante
+			th Descuento
+			th Comentarios
+			th Estado
+	- @user.agreement_payments.each do |agreement_payment|
+		tr
+			td= l agreement_payment.started_at, format: :date
+			td= l agreement_payment.expired_at, format: :date
+			td= agreement_payment.total_quotas
+			td= to_currency agreement_payment.amount_debt, agreement_payment.headquarter.currency
+			td= to_currency agreement_payment.amount, agreement_payment.headquarter.currency
+			td= to_currency agreement_payment.total_payment
+			td= to_currency agreement_payment.due
+			td= to_currency agreement_payment.discount
+			td= agreement_payment.comment
+			td class=(agreement_payment.state)
+				= t "agreement_payment_status.#{agreement_payment.state}"
+			td.actions
+				- if agreement_payment.opened?
+					= link_to "Editar", edit_user_agreement_payment_path(@user, agreement_payment, tab: "#agreement-payments"), class: "btn btn-xs btn-default"
+					|&nbsp;
+					= link_to "Eliminar", [@user, agreement_payment, tab: "#agreement-payments"], method: :delete, data: {confirm: "¿Estás seguro de eliminar este acuerdo de pago?"}, class: "btn btn-xs btn-danger"
+				- else
+					= link_to "Ver", edit_user_agreement_payment_path(@user, agreement_payment), class: "btn btn-xs btn-primary"

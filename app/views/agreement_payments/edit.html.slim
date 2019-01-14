@@ -2,73 +2,110 @@
 	h1 Acuerdo de Pago
 	- if @agreement_payment.opened?
 		= link_to 'Cerrar Acuerdo', close_agreement_payment_path(@agreement_payment), data: {confirm: "¿Estás seguro de cerrar este acuerdo de pago?"}, class:'btn btn-success btn-header' 
+		|&nbsp;
+		|&nbsp;
 		= link_to 'Cancelar Acuerdo', cancel_agreement_payment_path(@agreement_payment), data: {confirm: "¿Estás seguro de cancelar este acuerdo de pago?"}, class:'btn btn-danger btn-header'
 	- else
 		|&nbsp;
 		p class=("agreement-state state-#{@agreement_payment.state}")
 			= t "agreement_payment_status.#{@agreement_payment.state}"
-	div
-		/! Nav tabs
-		ul.nav.nav-tabs role="tablist" 
-			li.active role="presentation" 
-				a aria-controls="home" data-toggle="tab" href="#information" role="tab"  Información
-			li role="presentation" 
-				a aria-controls="profile" data-toggle="tab" href="#payments" role="tab"  Pagos
-		
-		/! Tab panes
-		.tab-content
-			#information.tab-pane.fade.in.active role="tabpanel"
-					br
-					= render 'form'
-					
-			#payments.tab-pane.fade role="tabpanel"
+div
+	/! Nav tabs
+	ul.nav.nav-tabs role="tablist" class=(@agreement_payment.state)
+		li.active role="presentation" 
+			a aria-controls="home" data-toggle="tab" href="#information" role="tab"  Información
+		li role="presentation" 
+			a aria-controls="profile" data-toggle="tab" href="#payments" role="tab"  Pagos del Acuerdo
+		li role="presentation"
+			a aria-controls="profile" data-toggle="tab" href="#general-debts-related" role="tab" Deudas Generales Relacionadas
+		li role="presentation"
+			a aria-controls="profile" data-toggle="tab" href="#monthly-debts-related" role="tab" Mensualidades Relacionadas
+	/! Tab panes
+	.tab-content
+		#information.tab-pane.fade.in.active role="tabpanel"
 				br
-				h5.table-title Pagos
-				- if @agreement_payment.opened?
-					|&nbsp;
-					= link_to "Adicionar Pago", new_agreement_payment_payment_path(@agreement_payment), class: 'btn btn-primary btn-xs'
-				table.table.table-actions
-					thead
-						tr
-							th Pagado el
-							th Valor
-							th Medio
-							th Descripción
-							th
-							th
-					- @agreement_payment.payments.each do |payment|
-						tr
-							td= l payment.paid_at, format: :date
-							td= to_currency payment.amount
-							td= payment.method
-							td= payment.comment
-							td.actions
-								- if @agreement_payment.opened?
-									= link_to "Editar", edit_agreement_payment_payment_path(@agreement_payment, payment), class: "btn btn-xs btn-default"
-									|&nbsp;
-									= link_to "Eliminar", [@agreement_payment, payment], method: :delete, data: {confirm: "Estás seguro de eliminar esta deuda"}, class: "btn btn-xs btn-danger"
+				= render 'form'
 				
-				br
-				.row
-					.col-md-offset-2.col-md-8
-						table.table.summary-table
-							thead
-								tr
-									th
-										h5.table-title Resumen de un vistazo
-									th
+		#payments.tab-pane.fade role="tabpanel"
+			br
+			= render "payments/list", {title: "Pagos", tab: "#payments", payments: @agreement_payment.payments, actions: (@agreement_payment.opened? ? true : false), link_add: new_agreement_payment_payment_path(@agreement_payment, tab: "#payments")}
+			br
+			br
+			.row
+				.col-md-offset-2.col-md-8
+					table.table.summary-table
+						thead
 							tr
-								td Total Deuda
-								td= to_currency @agreement_payment.amount
-							tr.payment
-								td Total Pagos
-								td= to_currency @agreement_payment.total_payment
-							tr.total-due
-								td
-									b Total
-								td
-									b= to_currency @agreement_payment.due
-	
-	br
-	
-	= link_to 'Volver', :back, class: 'btn btn-default' 
+								th
+									h5.table-title Resumen del Acuerdo
+								th
+						tr
+							td Acuerdo de Pago
+							td= to_currency @agreement_payment.amount
+						tr.payment
+							td Pagos del Acuerdo
+							td= to_currency @agreement_payment.total_payment
+						tr
+							td
+								b Total Deuda
+							td
+								b= to_currency @agreement_payment.due
+		#general-debts-related.tab-pane.fade role="tabpanel"
+			br
+			= render "debts/list", {title: "Deudas Relacionadas", tab: "#general-debts-related", debts: @agreement_payment.debts_related, actions: false}
+			br
+			br
+			= render "payments/list", {title: "Pagos Relacionados", tab: "general-debts-related", payments: @agreement_payment.payments_related, actions: false}
+			.row
+				.col-md-offset-2.col-md-8
+					table.table.summary-table
+						thead
+							tr
+								th
+									h5.table-title Resumen Deudas Generales Relacionadas
+								th
+						tr
+							td Deudas Generales Relacionadas
+							td= to_currency @agreement_payment.debts_related_total
+						tr.payment
+							td Pagos Generales Relacionados
+							td= to_currency @agreement_payment.payments_related_total
+						tr
+							td
+								b Deuda General Relacionada Antes del Acuerdo
+							td
+								b= to_currency @agreement_payment.due_related_total
+		
+		#monthly-debts-related.tab-pane.fade role="tabpanel"
+			br
+			= render "debt_periods/list", {title: "Periodos de Deuda Relacionados", tab: "#monthly-debts-related", periods: @agreement_payment.debt_periods_related, actions: false}
+			br
+			br
+			= render "pay_periods/list", {title: "Periodos de Pago Relacionados", tab: "#monthly-debts-related", periods: @agreement_payment.pay_periods_related, actions: false}
+			br
+			br
+			.row
+				.col-md-offset-2.col-md-8
+					table.table.summary-table
+						thead
+							tr
+								th
+									h5.table-title Resumen Mensualidades Relacionadas
+								th
+						tr
+							td Total Mensualidades
+							td= to_currency @agreement_payment.total_months_amount_related
+						tr.payment
+							td Total Pagos
+							td= to_currency @agreement_payment.pay_periods_related_total
+						tr
+							td
+								b Total Deuda
+							td
+								b= to_currency @agreement_payment.debt_periods_related_total
+br
+
+= link_to 'Volver', debts_user_path(@user, tab:"#agreement-payments"), class: 'btn btn-default' 
+
+br
+br

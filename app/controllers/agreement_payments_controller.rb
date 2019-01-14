@@ -1,12 +1,15 @@
 class AgreementPaymentsController < ApplicationController
   inherit_resources
-  belongs_to :general_debt, :monthly_debt, polymorphic: true
-  
+  belongs_to :user
   before_action :set_parent
   skip_before_action :set_parent, only: [:close, :cancel]
   
   def create
-    create! { url_for session[:back_url] }
+    create! do |success, failure|
+      success.html {
+        redirect_to url_for session[:back_url]
+      }
+    end
   end
   
   def new
@@ -24,16 +27,31 @@ class AgreementPaymentsController < ApplicationController
   end
 
   def destroy
-    destroy! { request.referer + params["tab"]}
+    if resource.payments.any?
+      flash[:failure] = 'No se puede eliminar porque hay pagos realizados a este acuerdo de pago. Elimine los pagos y vuelva a intentarlo'
+      redirect_to request.referer + params["tab"]
+    else
+      destroy! { request.referer + params["tab"]}
+    end
   end
   
   def close
-    AgreementPayment.find(params[:id]).close!
+    agreement_payment = AgreementPayment.find(params[:id])
+    if agreement_payment.may_close?
+      agreement_payment.close!
+    else
+      flash[:failure] = 'No se puede cerrar el acuerdo de pago porque no ha pagado toda la deuda'
+    end
     redirect_to request.referer
   end
   
   def cancel
-    AgreementPayment.find(params[:id]).cancel!
+    agreement_payment = AgreementPayment.find(params[:id])
+    if agreement_payment.may_cancel?
+      agreement_payment.cancel!
+    else
+      flash.now[:failure] = 'No se puede eliminar porque hay pagos realizados a este acuerdo de pago. Elimine los pagos y vuelva a intentarlo'
+    end
     redirect_to request.referer
   end
   

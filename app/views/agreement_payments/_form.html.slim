@@ -1,37 +1,59 @@
-= bootstrap_nested_form_for([@parent, @agreement_payment]) do |f|
-  .field.row
-    = f.hidden_field :headquarter_id, value: (f.object.headquarter.nil? ? current_user.group.headquarter.id : f.object.headquarter.id)
-    .col-xs-12.col-md-3
-      = f.text_field :started_at, value: f.object.started_at.nil? ? nil : l(f.object.started_at), required: true, readonly: (@agreement_payment.opened? ? false : true) 
-    .col-xs-12.col-md-3
-      = f.text_field :expired_at, value: f.object.expired_at.nil? ? nil : l(f.object.expired_at), required: true, readonly: (@agreement_payment.opened? ? false : true)
-    .col-xs-12.col-md-3
-      = f.number_field :amount, step: 'any', append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency), required: true, readonly: (@agreement_payment.opened? ? false : true)
-    .col-xs-12.col-md-3
-      - if f.object.amount_debt.nil?
-        = f.number_field :amount_debt, value: @parent.due, step:'any', append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency), required: true, readonly: false
-      - else 
-        = f.number_field :amount_debt, step:'any', append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency), required: true, readonly: true
-    .col-xs-12.col-md-3
-      = f.text_field :comment, readonly: (@agreement_payment.opened? ? false : true)
-  
-  h4 Cuotas
-  = f.fields_for :quotas do |builder|
-    .row
-      .col-xs-12.col-md-3
-        = builder.text_field :expected_at, class: "date-field", readonly: (@agreement_payment.opened? ? false : true)
-      .col-xs-12.col-md-3
-        = builder.number_field :amount, step: 'any', append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency), readonly: (@agreement_payment.opened? ? false : true)
-      - if @agreement_payment.opened?
-        .col-xs-12.col-md-3 
-          label.control-label.invisible amount
-          br
-          = builder.link_to_remove "Eliminar", class: "btn btn-danger btn-sm"
-  
-  - if @agreement_payment.opened?
-    = f.link_to_add "Adicionar una cuota", :quotas, class: "btn btn-default btn-sm"
-    br
-    br
-    .actions
-      = f.submit nil, class: "btn btn-primary"
-  
+.row
+	.col-xs-12.col-md-8.border-right
+		= bootstrap_nested_form_for([@parent, @agreement_payment]) do |f|
+			.field.row
+				= f.hidden_field :headquarter_id, value: (f.object.headquarter.nil? ? current_user.group.headquarter.id : f.object.headquarter.id)
+				.col-xs-12.col-md-3
+					= f.text_field :started_at, value: f.object.started_at.nil? ? nil : l(f.object.started_at), required: true, readonly: (@agreement_payment.opened? ? false : true) 
+				.col-xs-12.col-md-3
+					= f.text_field :expired_at, value: f.object.expired_at.nil? ? nil : l(f.object.expired_at), required: true, readonly: (@agreement_payment.opened? ? false : true)
+				.col-xs-12.col-md-3
+					= f.number_field :amount, step: 'any', append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency), required: true, readonly: (@agreement_payment.opened? ? false : true)
+				.col-xs-12.col-md-3
+					= f.number_field :amount_debt, step:'any', value: (@agreement_payment.amount.nil? ? @user.due : @agreement_payment.due_related_total), append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency), required: true, readonly: true
+				.col-xs-12.col-md-6
+					= f.text_field :comment, readonly: (@agreement_payment.opened? ? false : true)
+			
+			h4 Cuotas
+			= f.fields_for :quotas do |builder|
+				.row
+					.col-xs-12.col-md-3
+						= builder.text_field :expected_at, class: "date-field", readonly: (@agreement_payment.opened? ? false : true)
+					.col-xs-12.col-md-3
+						= builder.number_field :amount, step: 'any', append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency), readonly: (@agreement_payment.opened? ? false : true)
+					- if @agreement_payment.opened?
+						.col-xs-12.col-md-3 
+							label.control-label.invisible amount
+							br
+							= builder.link_to_remove "Eliminar", class: "btn btn-danger btn-sm"
+			
+			- if @agreement_payment.opened?
+				= f.link_to_add "Adicionar una cuota", :quotas, class: "btn btn-default btn-sm"
+				br
+				br
+				.actions
+					= f.submit nil, class: "btn btn-primary"
+					
+					
+					
+	.col-xs-12.col-md-4
+		table.table.summary-table.margin-top-none
+			thead
+				tr
+					th
+						h5.table-title.margin-top-none Deudas dentro del acuerdo
+					th
+			tr
+				td Deudas Generales
+				td= @agreement_payment.amount.nil? ? to_currency(@user.general_debt.due) : to_currency(@agreement_payment.due_general_debts_related_total)
+			tr
+				td Deudas Mensualidades
+				td= @agreement_payment.amount.nil? ? to_currency(@user.monthly_debt.due) : to_currency(@agreement_payment.due_monthly_debt_related_total)
+			tr
+				td
+					b Total
+				td
+					b= @agreement_payment.amount.nil? ? to_currency(@user.due) : to_currency(@agreement_payment.due_related_total)
+					
+	
+	

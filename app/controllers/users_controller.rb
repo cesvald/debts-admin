@@ -78,6 +78,7 @@ class UsersController < ApplicationController
 	def debts
 			@general_debt = @user.general_debt.nil? ? GeneralDebt.create(user: @user) : @user.general_debt
 			@monthly_debt = @user.monthly_debt.nil? ? MonthlyDebt.create(user: @user) : @user.monthly_debt
+			@opened_agreement = @user.agreement_payments.opened.first
 			session[:back_url] = debts_user_path(@user)
 	end
 	

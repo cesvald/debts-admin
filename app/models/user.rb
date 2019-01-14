@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 	
 	has_one :general_debt
 	has_one :monthly_debt
+	has_many :agreement_payments, -> {order(started_at: :desc)}
 	
 	
 	enum status: [:active, :inactive]
@@ -89,6 +90,14 @@ class User < ActiveRecord::Base
 	
 	def acom_outside?
 		coor? || admin? || groups.outside.exists?
+	end
+	
+	def opened_agreement?
+		agreement_payments.opened.exists?
+	end
+	
+	def due
+		general_debt.due + monthly_debt.due	
 	end
 	
 	 #( SELECT SUM(P.VALUE)  AS  PAYMENT FROM PAYMENTS P WHERE D.ID=P.PAYABLE_ID AND  P.PAYABLE_TYPE='Debt')

@@ -57,6 +57,8 @@
 						th Sede
 					th Nivel SKY
 					th Lección SKY
+					th Deuda Eventos
+					th Deuda Mensualidades
 					th Total Deuda
 					th
 			tbody
@@ -71,6 +73,8 @@
 								td = (user.group ? user.group.headquarter : '')
 							td = user.level
 							td = "#{user.lesson.lesson_level} #{user.lesson.number_level}"
+							td = user.general_debt.nil? ? to_currency(0) : to_currency(user.general_debt.due)
+							td = user.monthly_debt.nil? ? to_currency(0) : to_currency(user.monthly_debt.due)
 							td = user.monthly_debt.nil? ? to_currency(0) : to_currency(user.due)
 							td = link_to 'Ver deudas', debts_user_path(user), class: "btn btn-primary btn-xs"
 								

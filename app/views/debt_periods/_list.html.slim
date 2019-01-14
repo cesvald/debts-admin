@@ -1,0 +1,25 @@
+h5.table-title Periodos de Deuda
+|&nbsp;
+- if actions
+    = link_to "Adicionar Periodo de Deuda", link_add, class: 'btn btn-primary btn-xs'
+
+table.table.table-actions
+	thead
+		tr
+			th Empezó el
+			th Terminó el
+			th Meses de deuda
+			th Valor por mes
+			th total
+			th
+			th
+	- periods.order(started_at: :desc).each do |period|
+		tr
+			td= l(period.started_at, format: :month_year).camelize
+			td= (period.finished_at.nil? ? 'Actual' : l(period.finished_at, format: :month_year).camelize)
+			td= period.get_months
+			td= to_currency period.amount
+			td= to_currency period.total_amount 
+			td.actions
+			    - if actions
+				    = link_to "Eliminar", [period, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar este periodo de deuda?"}, class: "btn btn-xs btn-danger"

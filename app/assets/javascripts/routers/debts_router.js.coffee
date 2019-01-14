@@ -25,7 +25,7 @@ class Debts.Routers.MDebts extends Backbone.Router
 			uniqueSelection: true
 			placeholder: $('#debt_item').attr('placeholder')
 			selectionFormat: (item) ->
-				return "#{item.name} #{item.formatted_value}"
+				return "#{item.name}"
 			resultsFormatter: (item) ->
 				return "<li><div class='token-result-wrapper'><div>" + item.name + "</div></div></li>"
 		})

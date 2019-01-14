@@ -1,9 +1,10 @@
 = bootstrap_form_for([@payable, @payment]) do |f|
 	.field.row
+		= f.hidden_field :headquarter_id, value: (f.object.headquarter.nil? ? current_user.group.headquarter_id : f.object.headquarter_id)
 		.col-xs-12.col-md-3
-			= f.text_field :paid_at, required: true
+			= f.text_field :paid_at, required: true, value: f.object.paid_at.nil? ? nil : l(f.object.paid_at)
 		.col-xs-12.col-md-3
-			= f.number_field :amount, step:'any', required: true
+			= f.number_field :amount, step:'any', required: true, append: (f.object.headquarter.nil? ? current_user.group.headquarter.currency : f.object.headquarter.currency)
 		.field.col-lg-3
 			= f.select :method, options_for_select(["Efectivo", "Paypal", "Banco", "Otro"], f.object.method.nil? ? nil : f.object.method), required: true
 		.col-xs-12.col-md-3

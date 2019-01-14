@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pay Periods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Started at</th>
+      <th>Debt period</th>
+      <th>Monthly debt</th>
+      <th>Months</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pay_periods.each do |pay_period| %>
+      <tr>
+        <td><%= pay_period.amount %></td>
+        <td><%= pay_period.started_at %></td>
+        <td><%= pay_period.debt_period %></td>
+        <td><%= pay_period.monthly_debt %></td>
+        <td><%= pay_period.months %></td>
+        <td><%= link_to 'Show', pay_period %></td>
+        <td><%= link_to 'Edit', edit_pay_period_path(pay_period) %></td>
+        <td><%= link_to 'Destroy', pay_period, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pay period', new_pay_period_path %>

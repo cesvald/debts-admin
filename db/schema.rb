@@ -11,28 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190107025805) do
+ActiveRecord::Schema.define(version: 20190114151634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "agreement_payments", force: :cascade do |t|
-    t.integer  "state",            default: 0
+    t.integer  "state",               default: 0
     t.string   "comment"
     t.decimal  "amount"
     t.date     "started_at"
     t.date     "expired_at"
     t.decimal  "amount_debt"
-    t.decimal  "total_debt",       default: 0.0
-    t.decimal  "total_payment",    default: 0.0
+    t.decimal  "total_debt",          default: 0.0
+    t.decimal  "total_payment",       default: 0.0
     t.integer  "headquarter_id"
-    t.integer  "general_debts_id"
-    t.integer  "monthly_debts_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.date     "last_agreement_date"
+    t.integer  "user_id"
   end
 
   add_index "agreement_payments", ["headquarter_id"], name: "index_agreement_payments_on_headquarter_id", using: :btree
+  add_index "agreement_payments", ["user_id"], name: "index_agreement_payments_on_user_id", using: :btree
 
   create_table "albums", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -343,6 +344,20 @@ ActiveRecord::Schema.define(version: 20190107025805) do
 
   add_index "notifications", ["start_date"], name: "index_notifications_on_start_date", using: :btree
 
+  create_table "pay_periods", force: :cascade do |t|
+    t.decimal  "amount"
+    t.date     "started_at"
+    t.date     "paid_at"
+    t.integer  "debt_period_id"
+    t.integer  "monthly_debt_id"
+    t.integer  "months"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "pay_periods", ["debt_period_id"], name: "index_pay_periods_on_debt_period_id", using: :btree
+  add_index "pay_periods", ["monthly_debt_id"], name: "index_pay_periods_on_monthly_debt_id", using: :btree
+
   create_table "payment_notifications", force: :cascade do |t|
     t.text    "params",         null: false
     t.integer "cart_id",        null: false
@@ -547,6 +562,7 @@ ActiveRecord::Schema.define(version: 20190107025805) do
   add_index "web_push_subscriptions", ["user_id"], name: "index_web_push_subscriptions_on_user_id", using: :btree
 
   add_foreign_key "agreement_payments", "headquarters"
+  add_foreign_key "agreement_payments", "users"
   add_foreign_key "audios", "levels"
   add_foreign_key "books", "levels"
   add_foreign_key "carts", "users"
@@ -573,6 +589,8 @@ ActiveRecord::Schema.define(version: 20190107025805) do
   add_foreign_key "live_links", "lessons"
   add_foreign_key "main_pages", "levels", on_update: :cascade, on_delete: :cascade
   add_foreign_key "monthly_debts", "users"
+  add_foreign_key "pay_periods", "debt_periods"
+  add_foreign_key "pay_periods", "monthly_debts"
   add_foreign_key "payment_notifications", "carts"
   add_foreign_key "payments", "headquarters"
   add_foreign_key "photos", "albums", name: "fk_photos_album_id"

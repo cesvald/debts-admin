@@ -1,0 +1,16 @@
+= bootstrap_form_for([@monthly_debt, @pay_period]) do |f|
+  .field.row
+    = f.hidden_field :started_at, value: l(@debt_period.started_at, format: :date)
+    = f.hidden_field :debt_period_id, value: @debt_period.id
+    .col-xs-12.col-md-3
+      = f.text_field :paid_at
+    .col-xs-12.col-md-1
+      = f.select :months, options_for_select((1..(@debt_period.get_months))), include_blank: true
+    .col-xs-12.col-md-3
+      = f.number_field :amount, step: 'any', class: "readonly", readonly: true, value: @debt_period.amount, append: @pay_period.monthly_debt.user.group.headquarter.currency
+    .col-xs-12.col-md-3
+      .form-group
+        label.control-label Pago Total
+        = number_field_tag :total_amount, nil, step: 'any', class: "form-control readonly", readonly: true
+  .actions
+    = f.submit nil, class:"btn btn-primary"

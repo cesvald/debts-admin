@@ -1,5 +1,6 @@
-h3 Nuevo Acuerdo de Pago
-h5= "#{@parent.user.name} (#{@parent.user.email})"
+.page-header
+    h3 Nuevo Acuerdo de Pago
+    h5= "#{@user.name} (#{@user.email})"
 
 br
 
@@ -7,4 +8,4 @@ br
 
 br
 
-= link_to 'Volver', :back, class: "btn btn-default" 
+= link_to 'Volver', debts_user_path(@user, tab:"#agreement-payments"), class: "btn btn-default" 
