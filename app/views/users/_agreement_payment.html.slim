@@ -30,7 +30,7 @@ table.table.table-actions
 				= t "agreement_payment_status.#{agreement_payment.state}"
 			td.actions
 				- if agreement_payment.opened?
-					= link_to "Editar", edit_user_agreement_payment_path(@user, agreement_payment, tab: "#agreement-payments"), class: "btn btn-xs btn-default"
+					= link_to "Gestionar", edit_user_agreement_payment_path(@user, agreement_payment, tab: "#agreement-payments"), class: "btn btn-xs btn-default"
 					|&nbsp;
 					= link_to "Eliminar", [@user, agreement_payment, tab: "#agreement-payments"], method: :delete, data: {confirm: "¿Estás seguro de eliminar este acuerdo de pago?"}, class: "btn btn-xs btn-danger"
 				- else
