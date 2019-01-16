@@ -135,6 +135,6 @@ class AgreementPayment < ActiveRecord::Base
 	end
 	
 	def new_debt_period
-		user.monthly_debt.debt_periods.create(started_at: started_at + 1.month, amount: user.monthly_debt.debt_periods.first.amount)
+		user.monthly_debt.debt_periods.create(started_at: started_at + 1.month, amount: user.monthly_debt.debt_periods.first.amount) unless user.monthly_debt.debt_periods.first.nil?
 	end
 end
