@@ -21,7 +21,7 @@ class PayPeriod < ActiveRecord::Base
     if debt_period.months != 0 and  (debt_period.months - months == 0)
       debt_period.destroy
     else
-      debt_period.update_attribute(:started_at, debt_period.started_at + months.months)
+      debt_period.update_attributes(started_at: debt_period.started_at + months.months, months: debt_period.months - months)
     end
   end
   
@@ -29,7 +29,7 @@ class PayPeriod < ActiveRecord::Base
     if debt_period.nil?
       monthly_debt.debt_periods.create(started_at: started_at, months: months, amount: amount)
     else
-      debt_period.update_attribute(:started_at, debt_period.started_at - months.months)
+      debt_period.update_attributes(started_at: debt_period.started_at - months.months, months: debt_period.months + months)
     end
   end
 end

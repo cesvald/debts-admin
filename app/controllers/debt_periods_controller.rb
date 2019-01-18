@@ -1,6 +1,6 @@
 class DebtPeriodsController < ApplicationController
   inherit_resources
-  belongs_to :monthly_debt
+  belongs_to :monthly_debt, optional: true
   
   def create
     create! { url_for "#{session[:back_url]}#monthly-debt" }
