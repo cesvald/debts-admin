@@ -7,7 +7,7 @@ class Ability
     if current_user.admin?
         can :manage, :all
     end
-    =begin
+    
     if current_user.acom?
         can :manage, User
     end
@@ -54,7 +54,6 @@ class Ability
     
     can :read, Notification
     
-  =end
   end
   
 end
