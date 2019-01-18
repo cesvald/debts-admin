@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :check_user_active
   helper_method :namespace, :to_currency
   
+  
   def to_currency amount, currency='USD'
     ActionController::Base.helpers.number_to_currency amount, unit: currency, precision: 2, delimiter: '.', separator: ',', format: '%n %u'
   end
