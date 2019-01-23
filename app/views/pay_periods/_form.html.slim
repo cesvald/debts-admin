@@ -5,7 +5,7 @@
     .col-xs-12.col-md-3
       = f.text_field :paid_at
     .col-xs-12.col-md-1
-      = f.select :months, options_for_select((1..(@debt_period.get_months))), include_blank: true
+      = f.select :months, options_for_select((1..(@debt_period.get_months))), include_blank: true, required: true
     .col-xs-12.col-md-3
       = f.number_field :amount, step: 'any', class: "readonly", readonly: true, value: @debt_period.amount, append: @pay_period.monthly_debt.user.group.headquarter.currency
     .col-xs-12.col-md-3

@@ -18,7 +18,9 @@ class PayPeriod < ActiveRecord::Base
   end
   
   def remove_months_debt_period
-    if debt_period.months != 0 and  (debt_period.months - months == 0)
+    if debt_period.months == 0
+      debt_period.update_attributes(started_at: debt_period.started_at + months.months)
+    elsif debt_period.months != 0 and  (debt_period.months - months == 0)
       debt_period.destroy
     else
       debt_period.update_attributes(started_at: debt_period.started_at + months.months, months: debt_period.months - months)

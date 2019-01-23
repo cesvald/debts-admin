@@ -6,7 +6,7 @@ es:
       payment: Pago
       debt: Deuda
       agreement_payment: "Acuerdo de Pago"
-      debt_period: "Período de Pago"
+      debt_period: "Período de Deuda"
       pay_period: "Periodo de Pago"
     attributes:
       debt:

@@ -11,13 +11,12 @@ br
 					th
 						h5.table-title Resumen de Mensualidades
 					th
-			tr
-				td Total Meses
-				td= to_currency @user.monthly_debt.total_months_amount
 			tr.payment
-				td Total Pagos
-				td= to_currency @user.monthly_debt.total_payment
-			tr.total-due
+				td
+					b Total Pagos
+				td
+					b= to_currency @user.monthly_debt.total_payment
+			tr
 				td
 					b Total Deuda
 				td
