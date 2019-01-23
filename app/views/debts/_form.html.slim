@@ -7,7 +7,7 @@
         .col-lg-12
           = f.label :item_id, :class => 'control-label'
       .input-group
-        = f.text_field :item_id, {:class => 'form-control tokenizer-field', , :required => true, :data => {:item => @debt.item}}
+        = f.text_field :item_id, {:class => 'form-control tokenizer-field', :required => true, :data => {:item => @debt.item}}
         span#clean-guest-input-btn.input-group-btn
           button.btn.btn-default[type="button"] X
   .col-xs-12.col-md-3
