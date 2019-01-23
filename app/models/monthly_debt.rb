@@ -16,7 +16,7 @@ class MonthlyDebt < ActiveRecord::Base
     end
      
     def total_debt
-        new_debt_periods.any? ? new_debt_periods.where.not(months: 0).sum("amount * months") + current_period.total_amount : 0
+        new_debt_periods.any? ? new_debt_periods.where.not(months: 0).sum("amount * months") + (current_period.nil? ? 0 : current_period.total_amount) : 0
     end
     
     def total_payment
