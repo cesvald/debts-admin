@@ -12,7 +12,7 @@ table.table.table-actions
 			th Meses de pago
 			th Valor por mes
 			th Total
-			th
+			th Comentario
 			th
 	- periods.each_with_index do |period, index|
 		tr
@@ -21,7 +21,8 @@ table.table.table-actions
 			td= l(period.finished_at, format: :month_year).camelize
 			td= period.months
 			td= to_currency period.amount
-			td= to_currency period.total_amount 
+			td= to_currency period.total_amount
+			td= period.comment
 			td.actions
 				- if index == 0 and actions
 					= link_to "Eliminar", [period, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar este periodo de pago?"}, class: "btn btn-xs btn-danger"

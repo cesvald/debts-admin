@@ -29,7 +29,7 @@ class PayPeriodsController < ApplicationController
   private
 
     def pay_period_params
-      params.require(:pay_period).permit(:amount, :started_at, :paid_at, :debt_period_id, :monthly_debt_id, :months)
+      params.require(:pay_period).permit(:amount, :started_at, :paid_at, :debt_period_id, :monthly_debt_id, :months, :comment)
     end
 end
 

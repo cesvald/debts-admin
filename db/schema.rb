@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190114151634) do
+ActiveRecord::Schema.define(version: 20190123160538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -353,6 +353,7 @@ ActiveRecord::Schema.define(version: 20190114151634) do
     t.integer  "months"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "comment"
   end
 
   add_index "pay_periods", ["debt_period_id"], name: "index_pay_periods_on_debt_period_id", using: :btree

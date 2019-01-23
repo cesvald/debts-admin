@@ -12,5 +12,7 @@
       .form-group
         label.control-label Pago Total
         = number_field_tag :total_amount, nil, step: 'any', class: "form-control readonly", readonly: true, append: @pay_period.monthly_debt.user.group.headquarter.currency
+    .col-xs-12.col-md-5
+      = f.text_field :comment
   .actions
     = f.submit nil, class:"btn btn-primary"

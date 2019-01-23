@@ -37,6 +37,7 @@ es:
         started_at: "Pagado desde"
         paid_at: "Fecha de Pago"
         months: "Meses"
+        comment: "Comentarios"
       item:
         name: "Nombre"
         
