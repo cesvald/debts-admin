@@ -3,7 +3,7 @@
     = f.hidden_field :started_at, value: l(@debt_period.started_at, format: :date)
     = f.hidden_field :debt_period_id, value: @debt_period.id
     .col-xs-12.col-md-3
-      = f.text_field :paid_at
+      = f.text_field :paid_at, required:true
     .col-xs-12.col-md-1
       = f.select :months, options_for_select((1..(@debt_period.get_months))), include_blank: true, required: true
     .col-xs-12.col-md-3

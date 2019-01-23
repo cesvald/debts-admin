@@ -8,7 +8,7 @@
 		.field.col-lg-3
 			= f.select :method, options_for_select(["Efectivo", "Paypal", "Banco", "Otro"], f.object.method.nil? ? nil : f.object.method), required: true
 		.col-xs-12.col-md-3
-			= f.text_field :comment 
+			= f.text_field :comment
 	
 	.actions
 	  = f.submit nil, class: "btn btn-primary" 
