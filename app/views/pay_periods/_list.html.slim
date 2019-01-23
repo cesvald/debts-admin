@@ -16,7 +16,7 @@ table.table.table-actions
 			th
 	- periods.each_with_index do |period, index|
 		tr
-			td= l(period.paid_at, format: :month_year).camelize
+			td= l period.paid_at, format: :date
 			td= l(period.started_at, format: :month_year).camelize
 			td= l(period.finished_at, format: :month_year).camelize
 			td= period.months
