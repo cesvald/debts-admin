@@ -114,12 +114,19 @@ a.btn-primary:visited, a.btn-success:visited, a.btn-danger:visited
       font-size: 14px
     > td
       vertical-align: middle
+      form
+        margin-top: 12px
     &.payment
       color: #27AE60
   &.table-actions > tbody > tr
     > td:last-child > a
       visibility: hidden
     &:hover > td:last-child > a
+      visibility: visible
+  &.table-actions > tbody > tr
+    > td:last-child > div.btn
+      visibility: hidden
+    &:hover > td:last-child > div.btn
       visibility: visible
 
 h5.table-title

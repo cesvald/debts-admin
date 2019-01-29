@@ -25,3 +25,33 @@ class Debts.Views.UsersDebts extends Backbone.View
                 $(this).fadeIn(200)
             )
         )
+        
+        $('.btn-pay-period-edit').click( ->
+            $(this).parent().fadeOut(200, ->
+                $(this).find('.btn-pay-period-edit').addClass('hidden')
+                $(this).find('.btn-pay-period-delete').addClass('hidden')
+                $(this).parent().find('.pay-period-comment').addClass('hidden')
+                $(this).find('.btn-pay-period-update').removeClass('hidden')
+                $(this).find('.btn-pay-period-cancel').removeClass('hidden')
+                $(this).parent().find('.comment-form').removeClass('hidden').find('input.form-control:first').focus()
+                
+                $(this).fadeIn(200)
+            )
+        )
+        
+        $('.btn-pay-period-cancel').click( ->
+            $(this).parent().fadeOut(200, ->
+                $(this).find('.btn-pay-period-edit').removeClass('hidden')
+                $(this).find('.btn-pay-period-delete').removeClass('hidden')
+                $(this).parent().find('.pay-period-comment').removeClass('hidden')
+                $(this).find('.btn-pay-period-update').addClass('hidden')
+                $(this).find('.btn-pay-period-cancel').addClass('hidden')
+                $(this).parent().find('.comment-form').addClass('hidden').find('input.form-control:first').blur()
+                
+                $(this).fadeIn(200)
+            )
+        )
+        
+        $('.btn-pay-period-update').click( ->
+            $(this).closest('tr').find('form').submit()
+        )

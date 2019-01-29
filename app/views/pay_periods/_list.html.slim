@@ -22,7 +22,21 @@ table.table.table-actions
 			td= period.months
 			td= to_currency period.amount
 			td= to_currency period.total_amount
-			td= period.comment
+			td
+				.pay-period-comment
+					= period.comment
+				- if actions
+					.comment-form.hidden
+						= bootstrap_form_for period do |f|
+							= f.text_field :comment, hide_label: true, class: "input-sm no-height"
+					
 			td.actions
+				- if actions
+					div.btn-pay-period-edit.btn.btn-default.btn-xs= "Editar Comentario"
+					div.btn-pay-period-update.btn.btn-primary.btn-xs.hidden= "Actualizar Comentario"
+					|&nbsp;
+					div.btn-pay-period-cancel.btn.btn-danger.btn-xs.hidden= "Cancelar"
 				- if index == 0 and actions
-					= link_to "Eliminar", [period, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar este periodo de pago?"}, class: "btn btn-xs btn-danger"
+					= link_to "Eliminar", [period, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar este periodo de pago?"}, class: "btn btn-xs btn-danger btn-pay-period-delete"
+				
+				

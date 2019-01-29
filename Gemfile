@@ -44,7 +44,9 @@ gem 'axlsx_rails'
 
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '3.3.7'
+gem 'sass', '= 3.4.22'
 gem 'sassc-rails', '>= 2.0.0'
+gem "compass-rails",  github: 'Compass/compass-rails'
 gem "bootstrap_flash_messages"
 gem 'bootstrap_form'
 
@@ -55,10 +57,6 @@ gem 'bootstrap3-datetimepicker-rails'
 # Rails-JQuery nested manager
 gem "jquery-rails"
 gem "nested_form"
-
-# HTML manipulation and formatting
-gem 'formtastic'
-gem 'formtastic-bootstrap'
 
 # Authentication
 gem 'devise', '~> 4.5.0'

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   resources :payments, only: :destroy
   resources :debts, only: :destroy
-  resources :pay_periods, only: :destroy
+  resources :pay_periods, only: [:destroy, :update]
   resources :debt_periods, only: :destroy
   
   resources :users do
