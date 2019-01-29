@@ -8,6 +8,7 @@ es:
       agreement_payment: "Acuerdo de Pago"
       debt_period: "Período de Deuda"
       pay_period: "Periodo de Pago"
+      deposit: Abono
     attributes:
       debt:
         item_id: Concepto
@@ -40,6 +41,8 @@ es:
         comment: "Comentarios"
       item:
         name: "Nombre"
+      monthly_debt:
+        deposit: "Abono"
         
   agreement_payment_status:
     opened: 'Abierto'

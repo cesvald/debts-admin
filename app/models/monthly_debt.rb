@@ -28,7 +28,7 @@ class MonthlyDebt < ActiveRecord::Base
     end
 	
 	def due
-	    total_debt
+	    total_debt - deposit
 	end
 	
 	def new_pay_periods
@@ -48,5 +48,4 @@ class MonthlyDebt < ActiveRecord::Base
 			debt_periods
 		end
 	end
-	
 end
