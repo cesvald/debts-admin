@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  headquarter_id: 
+  debt_type: 1
+  debt: 9.99
+  payment: 9.99
+  due: 9.99
+  generated_at: 2019-02-08
+
+two:
+  user_id: 
+  headquarter_id: 
+  debt_type: 1
+  debt: 9.99
+  payment: 9.99
+  due: 9.99
+  generated_at: 2019-02-08

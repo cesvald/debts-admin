@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190123160538) do
+ActiveRecord::Schema.define(version: 20190208021145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,21 @@ ActiveRecord::Schema.define(version: 20190123160538) do
   add_index "audios", ["audiable_type", "audiable_id"], name: "index_audios_on_audiable_type_and_audiable_id", using: :btree
   add_index "audios", ["level_id"], name: "index_audios_on_level_id", using: :btree
   add_index "audios", ["list_id"], name: "index_audios_on_list_id", using: :btree
+
+  create_table "balances", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "headquarter_id"
+    t.integer  "debt_type"
+    t.decimal  "debt"
+    t.decimal  "payment"
+    t.decimal  "due"
+    t.date     "generated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "balances", ["headquarter_id"], name: "index_balances_on_headquarter_id", using: :btree
+  add_index "balances", ["user_id"], name: "index_balances_on_user_id", using: :btree
 
   create_table "books", force: :cascade do |t|
     t.string   "title",          limit: 255
@@ -565,6 +580,8 @@ ActiveRecord::Schema.define(version: 20190123160538) do
   add_foreign_key "agreement_payments", "headquarters"
   add_foreign_key "agreement_payments", "users"
   add_foreign_key "audios", "levels"
+  add_foreign_key "balances", "headquarters"
+  add_foreign_key "balances", "users"
   add_foreign_key "books", "levels"
   add_foreign_key "carts", "users"
   add_foreign_key "chapters", "sections", name: "fk_chapters_section_id"

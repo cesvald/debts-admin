@@ -28,7 +28,7 @@ class MonthlyDebt < ActiveRecord::Base
     end
 	
 	def due
-	    total_debt - deposit
+	    total_debt - (deposit.nil? ? 0 : deposit)
 	end
 	
 	def new_pay_periods
