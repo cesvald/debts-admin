@@ -7,7 +7,7 @@ es:
       debt: Deuda
       agreement_payment: "Acuerdo de Pago"
       debt_period: "Período de Deuda"
-      pay_period: "Periodo de Pago"
+      pay_period: "Pago"
       deposit: Abono
     attributes:
       debt:
@@ -39,11 +39,15 @@ es:
         paid_at: "Fecha de Pago"
         months: "Meses"
         comment: "Comentarios"
+        is_partial: "¿Pago parcial?"
       item:
         name: "Nombre"
       monthly_debt:
         deposit: "Abono"
-        
+      deposit:
+        deposited_at: "Abonado el"
+        amount: "Valor"
+        comment: Comentario
   agreement_payment_status:
     opened: 'Abierto'
     completed: 'Completado'
@@ -52,6 +56,12 @@ es:
   date:
     formats:
       date: "%d/%m/%Y"
+      js_date: "%Y-%m-%d"
+      month_year: "%B %Y"
+      month: "%B"
+      year: "%Y"
+  time:
+    formats:
       month_year: "%B %Y"
   helpers:
     actions: "Acciones"

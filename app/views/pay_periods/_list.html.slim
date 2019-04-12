@@ -1,8 +1,10 @@
 h5.table-title= title
 |&nbsp;
-- if actions
-	= link_to "Adicionar Periodo de Pago", new_monthly_debt_pay_period_path(@monthly_debt), class: 'btn btn-primary btn-xs'
-
+- if actions and @debt_period
+	- unless @partial_payment_is_active
+		= link_to "Realziar Pago", new_monthly_debt_pay_period_path(@monthly_debt), class: 'btn btn-primary btn-xs align-title'
+		|&nbsp;
+	= link_to "Realizar Pago Parcial Para el mes de #{l @debt_period.started_at, format: :month_year}", new_monthly_debt_partial_pay_period_path(@monthly_debt), class: 'btn btn-primary btn-xs align-title'
 table.table.table-actions
 	thead
 		tr
@@ -32,11 +34,11 @@ table.table.table-actions
 					
 			td.actions
 				- if actions
-					div.btn-pay-period-edit.btn.btn-default.btn-xs= "Editar Comentario"
+					= link_to "Editar", (period.is_partial ? edit_monthly_debt_partial_pay_period_path(period.monthly_debt, period) : edit_monthly_debt_pay_period_path(period.monthly_debt, period)), class: "btn btn-xs btn-default"
 					div.btn-pay-period-update.btn.btn-primary.btn-xs.hidden= "Actualizar Comentario"
 					|&nbsp;
 					div.btn-pay-period-cancel.btn.btn-danger.btn-xs.hidden= "Cancelar"
-				- if index == 0 and actions
+				- if actions
 					= link_to "Eliminar", [period, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar este periodo de pago?"}, class: "btn btn-xs btn-danger btn-pay-period-delete"
 				
 				

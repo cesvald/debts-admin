@@ -1,0 +1,6 @@
+.month-picker data-amount= amount data-date= (l(debt_month, format: :date))
+    p.month-name= (l(debt_month, format: :month)).camelize
+    p.picker-year= l(debt_month, format: :year)
+    p.picker-currency
+        span.amount= amount
+        = " #{currency}"

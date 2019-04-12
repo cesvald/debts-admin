@@ -1,7 +1,8 @@
 h5.table-title Periodos de Deuda
 |&nbsp;
 - if actions
-    = link_to "Adicionar Periodo de Deuda", link_add, class: 'btn btn-primary btn-xs'
+	- unless @partial_payment_is_active
+    = link_to "Adicionar Periodo de Deuda", link_add, class: 'btn btn-primary btn-xs align-title'
 
 table.table.table-actions
 	thead
@@ -12,14 +13,20 @@ table.table.table-actions
 			th Valor por mes
 			th total
 			th
-			th
 	- periods.order(started_at: :desc).each do |period|
 		tr
 			td= l(period.started_at, format: :month_year).camelize
-			td= (period.finished_at.nil? ? 'Actual' : l(period.finished_at, format: :month_year).camelize)
-			td= period.get_months
+			td= (period.finished_at.nil? ? l(DateTime.now, format: :month_year).camelize : l(period.finished_at, format: :month_year).camelize)
+			td= period.months
 			td= to_currency period.amount
-			td= to_currency period.total_amount 
+			td= to_currency period.total_amount
 			td.actions
+				- if period.is_partial
+					spam.row-detail Deuda Parcial 
+					|&nbsp;
+					|&nbsp;
 			    - if actions
+			    	- unless period.is_partial
+			    		= link_to "Actualizar", edit_monthly_debt_debt_period_path(period.monthly_debt, period), class: "btn btn-xs btn-default"
+			    		|&nbsp;
 				    = link_to "Eliminar", [period, tab: tab], method: :delete, data: {confirm: "¿Estás seguro de eliminar este periodo de deuda?"}, class: "btn btn-xs btn-danger"

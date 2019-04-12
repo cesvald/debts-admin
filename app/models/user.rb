@@ -101,6 +101,7 @@ class User < ActiveRecord::Base
 	end
 	
 	 #( SELECT SUM(P.VALUE)  AS  PAYMENT FROM PAYMENTS P WHERE D.ID=P.PAYABLE_ID AND  P.PAYABLE_TYPE='Debt')
+	 
 	def total_debts_by_currency
 		@user_id=id
 	 	@query="SELECT DC.CURRENCY AS CURRENCY,SUM(DC.DEBT) AS DEBT, SUM(DC.PAYMENTS) AS PAYMENT, SUM(DC.DISCOUNTS) AS DISCOUNT, 
@@ -115,6 +116,29 @@ class User < ActiveRecord::Base
 		          GROUP BY DC.CURRENCY;"
 		          
 		results = ActiveRecord::Base.connection.execute(@query)
+		return results
+	end
+	#AND GD.USER_ID=#{@user_id}
+	def total_general_debts_first_load
+		@user_id=id
+	
+		 @query="  SELECT SUM(BALANCE_DEBT) AS TOTAL_DEBT,HEADQUARTER_ID,CURRENCY_BALANCE,SUM (PAYMENTS_BALANCE) AS TOTAL_PAYMENT
+				   FROM(
+						SELECT  D.DEBABLE_ID,(GD.TOTAL_DEBT-GD.TOTAL_PAYMENT) AS BALANCE_DEBT,GD.TOTAL_DEBT, GD.TOTAL_PAYMENT, GD.DEPOSIT,D.ITEM_ID,I.HEADQUARTER_ID , I.NAME,H.NAME AS HEADQUARTER_BALANCE, H.CURRENCY AS CURRENCY_BALANCE,
+						(SELECT COALESCE(SUM(P.AMOUNT),0)   FROM PAYMENTS  P  WHERE P.PAYABLE_ID=D.DEBABLE_ID  AND P.PAYABLE_TYPE='GeneralDebt' AND  P.PAID_AT BETWEEN CAST ('2019-01-01' AS DATE) AND CAST ('2019-01-31' AS DATE)) AS PAYMENTS_BALANCE
+						FROM General_Debts GD, DEBTS D, ITEMS I , HEADQUARTERS H
+						WHERE (GD.TOTAL_DEBT-GD.TOTAL_PAYMENT)>0 AND GD.ID=D.DEBABLE_ID AND I.ID= D.ITEM_ID AND H.ID=I.HEADQUARTER_ID AND GD.USER_ID=#{@user_id}
+					) AS BALANCE_ALIAS
+					GROUP BY BALANCE_ALIAS.HEADQUARTER_ID, BALANCE_ALIAS.CURRENCY_BALANCE;"
+
+		results = ActiveRecord::Base.connection.execute(@query)
+    	puts "resultados --**********-"
+    	results.each do |row|
+    		puts "dentro de resultados"
+    		puts row['HEADQUARTER_ID'] + "    " + row['TOTAL_DEBT']
+			puts row
+		end
+		
 		return results
 	end
 	

@@ -1,10 +1,20 @@
-= bootstrap_form_for([@monthly_debt, @debt_period]) do |f|
+= bootstrap_form_for([@monthly_debt, @debt_period], html: { autocomplete: 'off' })  do |f|
+  - if @debt_period.errors.any?
+    - @debt_period.errors.messages.each do |attr, msg|
+      - msg.each do |val|
+        p.error-msg= val
   .field.row
     .col-xs-12.col-md-3
-      = f.text_field :started_at, required:true
+      label.control-label Empieza en
+      = text_field_tag :started_at, nil, id: :started_at, class: 'form-control', required: true, autocomplete: :off, value: (f.object.started_at.nil? ? nil : l(f.object.started_at, format: :month_year))
+      = f.hidden_field :started_at, required:true
+    .col-xs-12.col-md-3
+      label.control-label required="required" Termina en
+      = text_field_tag :finished_at, nil, id: :finished_at, class: 'form-control', required: true, autocomplete: :off, value: (f.object.finished_at.nil? ? nil : l(f.object.finished_at, format: :month_year))
+      = f.hidden_field :finished_at, required:true
     .col-xs-12.col-md-3
       = f.number_field :amount, step: 'any', append: @debt_period.monthly_debt.user.group.headquarter.currency, required:true
   
-  
   .actions
     = f.submit nil, class:"btn btn-primary"
+ 

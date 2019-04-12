@@ -3,6 +3,10 @@ class MonthlyDebt < ActiveRecord::Base
     has_many :debt_periods, -> {order(started_at: :desc)}
     has_many :pay_periods, -> {order(started_at: :desc)}
     
+    def partial_pay_periods
+        pay_periods.where(is_partial: true)
+    end
+    
     def opened_agreement?
 		agreement_payments.opened.exists?
 	end
@@ -12,15 +16,20 @@ class MonthlyDebt < ActiveRecord::Base
     end
     
     def current_period
-        debt_periods.where(months: 0).first
+        debt_periods.where(finished_at: nil).first
     end
-     
+    
+    def partial_opened?
+    	pay_period = pay_periods.where(partial: true, completed: false)
+    	pay_period.nil?
+    end 
+    
     def total_debt
-        new_debt_periods.any? ? new_debt_periods.where.not(months: 0).sum("amount * months") + (current_period.nil? ? 0 : current_period.total_amount) : 0
+        new_debt_periods.any? ? new_debt_periods.where.not(finished_at: nil).sum("((DATE_PART('year', finished_at) - DATE_PART('year', started_at)) * 12 + (DATE_PART('month', finished_at) - DATE_PART('month', started_at)) + 1) * amount") + (current_period.nil? ? 0 : current_period.total_amount) : 0
     end
     
     def total_payment
-        new_pay_periods.any? ? new_pay_periods.sum("amount * months") : 0
+        new_pay_periods.any? ? new_pay_periods.sum("((DATE_PART('year', finished_at) - DATE_PART('year', started_at)) * 12 + (DATE_PART('month', finished_at) - DATE_PART('month', started_at)) + 1) * amount") : 0
     end
     
     def total_months_amount

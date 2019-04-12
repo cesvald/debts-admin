@@ -15,6 +15,7 @@ window.Debts =
 		new Debts.Routers.AgreementPayments() if controller == "agreement_payments"
 		new Debts.Routers.DebtPeriods() if controller == "debt_periods"
 		new Debts.Routers.PayPeriods() if controller == "pay_periods"
+		new Debts.Routers.PartialPayPeriods() if controller == "partial_pay_periods"
 		new Debts.Routers.Users() if controller == "users"
 		
 		Backbone.history.stop()

@@ -35,4 +35,10 @@ class Debt < ActiveRecord::Base
     debable.save!
   end
   
+  def less_total_debt
+    debable.total_debt = debable.total_debt - amount
+    debable.save!
+  end
+  
+  
 end

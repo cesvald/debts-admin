@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190208021145) do
+ActiveRecord::Schema.define(version: 20190406051340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,8 +141,10 @@ ActiveRecord::Schema.define(version: 20190208021145) do
     t.date     "started_at"
     t.integer  "monthly_debt_id"
     t.integer  "months",          default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.date     "finished_at"
+    t.boolean  "is_partial",      default: false
   end
 
   add_index "debt_periods", ["monthly_debt_id"], name: "index_debt_periods_on_monthly_debt_id", using: :btree
@@ -366,9 +368,11 @@ ActiveRecord::Schema.define(version: 20190208021145) do
     t.integer  "debt_period_id"
     t.integer  "monthly_debt_id"
     t.integer  "months"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "comment"
+    t.boolean  "is_partial",      default: false
+    t.date     "finished_at"
   end
 
   add_index "pay_periods", ["debt_period_id"], name: "index_pay_periods_on_debt_period_id", using: :btree

@@ -26,7 +26,7 @@ a
 div
   &.field, &.actions
     margin-bottom: 10px
-
+  
 #notice
   color: green
 
@@ -128,6 +128,11 @@ a.btn-primary:visited, a.btn-success:visited, a.btn-danger:visited
       visibility: hidden
     &:hover > td:last-child > div.btn
       visibility: visible
+  &.table-actions > tbody > tr
+    > td:last-child > .row-detail
+      color: green
+      text-decoration: underline
+      vertical-align: super
 
 h5.table-title
   font-weight: bold
@@ -183,3 +188,40 @@ b.payment
   
 .vertical-top
   vertical-align: top !important
+  
+.month-picker
+  display: inline-block
+  padding: 10px
+  padding-top: 21px
+  height: 120px
+  width: 120px
+  border: solid 1px orange
+  border-radius: 10px
+  margin: 5px
+  text-align: center
+  &:hover, &.hover
+    background: #f9c496
+  &.active
+    cursor: pointer
+  &.selected
+    background: #ef760f
+    color: white
+    &:hover
+      background: #ef760f
+      color: white
+  .month-name
+    font-size: 14px
+    font-weight: bold
+  .picker-year
+    font-size: 14px
+    font-weight: bold
+
+#total-payment-wrapper
+  font-size: 18px
+
+p.error-msg
+  color: #A94442
+  
+.align-title
+  position: relative
+  top: 3px

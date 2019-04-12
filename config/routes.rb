@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :deposits
   devise_for :users
   get 'home/index'
 
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
   resources :debts, only: :destroy
   resources :pay_periods, only: [:destroy, :update]
   resources :debt_periods, only: :destroy
+  resources :deposits, only: :destroy
   
   resources :users do
     resources :agreement_payments
@@ -43,8 +43,9 @@ Rails.application.routes.draw do
   
   resources :monthly_debts do
     resources :pay_periods
+    resources :partial_pay_periods
     resources :debt_periods
-  end
+    end
   
   root 'users#index'
   

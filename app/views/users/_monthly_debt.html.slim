@@ -1,21 +1,9 @@
+
 = render "debt_periods/list", {title: "Periodos de Deuda", tab: "#monthly-debt", actions: true, link_add: new_monthly_debt_debt_period_path(@monthly_debt), periods: @monthly_debt.new_debt_periods}
 br
 br
-= render "pay_periods/list", {title: "Periodos de Pago", tab: "#monthly-debt", actions: @monthly_debt.new_debt_periods.any?, periods: @monthly_debt.new_pay_periods}
-br
-br
-h5.table-title= "Abono"
-= bootstrap_form_for @monthly_debt do |f|
-	.col-xs-12.col-md-3
-		= f.number_field :deposit, hide_label: true, step: 'any', readonly: true, append: (@user.group.headquarter.currency)
-	.col-xs-12.col-md-6
-		div.btn.btn-default#btn-edit-deposit Editar
-		= f.submit "Actualizar Abono", class: "btn btn-primary invisible"
-		| &nbsp;
-		div.btn.btn-danger.invisible#btn-cancel-edit-deposit Cancelar
+= render "pay_periods/list", {title: "Pagos Realizados", tab: "#monthly-debt", actions: true, periods: @monthly_debt.new_pay_periods}
 
-br
-br
 br
 br
 br
@@ -36,11 +24,7 @@ br
 				td.vertical-top
 					b Total Deuda
 				td
-					b= "Deuda: #{to_currency @user.monthly_debt.total_debt}"
-					br
-					b.payment= "Abono: #{to_currency @user.monthly_debt.deposit}"
-					br
-					b= "Total Deuda: #{to_currency @user.monthly_debt.due}"
+					b= "#{to_currency @user.monthly_debt.total_debt}"
 					
 br
 br
