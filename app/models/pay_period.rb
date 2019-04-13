@@ -94,9 +94,7 @@ class PayPeriod < ActiveRecord::Base
       amount
     end
   end
-  
-  def months
-    (finished_at.year * 12 + finished_at.month) - (started_at.year * 12 + started_at.month) + 1
+
   end
   
   def total_amount

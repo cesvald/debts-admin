@@ -6,7 +6,6 @@ class DebtPeriod < ActiveRecord::Base
   
   validates :started_at, :amount, presence: true
   validate :valid_dates
-  validate :available
   
   scope :between_dates, -> (started_at, finished_at) { where("started_at > :started_at	AND started_at <= :finished_at", {started_at: started_at, finished_at: finished_at} ) }
   scope :started_after, -> (started_at) { where("started_at > :started_at", {started_at: started_at}) }
@@ -18,10 +17,6 @@ class DebtPeriod < ActiveRecord::Base
     self.started_at = self.started_at.beginning_of_month
     self.finished_at =  self.finished_at.beginning_of_month
     self.finished_at = nil if self.finished_at == DateTime.now.to_date.beginning_of_month
-  end
-  
-  def months
-    (current_finished_at.year * 12 + current_finished_at.month) - (started_at.year * 12 + started_at.month) + 1
   end
   
   def total_amount
