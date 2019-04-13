@@ -94,8 +94,6 @@ class PayPeriod < ActiveRecord::Base
       amount
     end
   end
-
-  end
   
   def total_amount
     months * amount
