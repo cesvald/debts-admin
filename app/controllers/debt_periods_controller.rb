@@ -8,13 +8,15 @@ class DebtPeriodsController < ApplicationController
   
   def new
     session[:back_url] = request.referer
-    last_debt_period = parent.debt_periods.where(finished_at: nil).first
-    if last_debt_period
-      gon.finished_at = l DateTime.now.to_date.beginning_of_month(), format: :js_date
+    pay_period = parent.pay_periods.where(finished_at: DateTime.now.to_date.beginning_of_month()).first
+    if pay_period.nil?
+      gon.finished_at =  l Date.today.beginning_of_month() + 1.month, format: :js_date
+      gon.started_at = nil
     else
-      pay_period = parent.pay_periods.where(started_at: DateTime.now.to_date.beginning_of_month()).first
-      gon.finished_at = pay_period.nil? ? (l DateTime.now.to_date.beginning_of_month() + 1.month, format: :js_date) : nil
+      gon.finished_at = nil
+      gon.started_at = l Date.today + 1.month, format: :js_date
     end
+    
     new!
   end
   

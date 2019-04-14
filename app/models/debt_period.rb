@@ -16,7 +16,7 @@ class DebtPeriod < ActiveRecord::Base
   
   def set_first_day_of_month
     self.started_at = self.started_at.beginning_of_month
-    self.finished_at =  self.finished_at.beginning_of_month
+    self.finished_at =  self.finished_at.beginning_of_month if self.finished_at
     self.finished_at = nil if self.finished_at == DateTime.now.to_date.beginning_of_month
   end
   

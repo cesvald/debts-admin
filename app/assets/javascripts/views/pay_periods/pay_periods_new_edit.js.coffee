@@ -11,7 +11,7 @@ class Debts.Views.PayPeriodsNewEdit extends Backbone.View
                     prev.addClass('hover')
                     prev = prev.prev()
                     
-        , ->    
+        , ->
             $('.month-picker.hover').removeClass('hover')
         )
         
@@ -60,8 +60,7 @@ class Debts.Views.PayPeriodsNewEdit extends Backbone.View
             $('#total-payment').html($('.month-picker:first').data("amount"))
             
         $('#pay_period_paid_at').datetimepicker(
-            format: 'DD/MM/Y',
-            useCurrent: false
+            format: 'DD/MM/Y'
         )
         
         

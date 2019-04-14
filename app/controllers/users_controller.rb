@@ -76,16 +76,16 @@ class UsersController < ApplicationController
 	end
 	
 	def debts
-			@general_debt = @user.general_debt.nil? ? GeneralDebt.create(user: @user) : @user.general_debt
-			@monthly_debt = @user.monthly_debt.nil? ? MonthlyDebt.create(user: @user) : @user.monthly_debt
-			@debt_period = @monthly_debt.debt_periods.last
-			unless @debt_period
-				last_pay_period = @monthly_debt.pay_periods.last
-				@debt_period = @user.monthly_debt.debt_periods.create(started_at: Date.today, finished_at: Date.today, amount: last_pay_period.all_amount) if last_pay_period and last_pay_period.finished_at < Date.today.beginning_of_month
-			end
-			@partial_payment_is_active = (@debt_period and @debt_period.is_partial)
-			@opened_agreement = @user.agreement_payments.opened.first
-			session[:back_url] = debts_user_path(@user)
+		@general_debt = @user.general_debt.nil? ? GeneralDebt.create(user: @user) : @user.general_debt
+		@monthly_debt = @user.monthly_debt.nil? ? MonthlyDebt.create(user: @user) : @user.monthly_debt
+		@debt_period = @monthly_debt.debt_periods.last
+		unless @debt_period
+			last_pay_period = @monthly_debt.pay_periods.last
+			@debt_period = @user.monthly_debt.debt_periods.create(started_at: Date.today, amount: last_pay_period.all_amount) if last_pay_period and last_pay_period.finished_at < Date.today.beginning_of_month
+		end
+		@partial_payment_is_active = (@debt_period and @debt_period.is_partial)
+		@opened_agreement = @user.agreement_payments.opened.first
+		session[:back_url] = debts_user_path(@user)
 	end
 	
 	def import_general_debts
